@@ -1,6 +1,7 @@
-import React from 'react'
-import logo from '../../assets/images/logo/logo-dark.png'
-import AuthModel from './AuthModel'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/images/logo/logo-dark.png';
+import AuthModel from './AuthModel';
 const Header = () => {
     return (
         <>
@@ -26,9 +27,12 @@ const Header = () => {
                     </div>
                     <div className="navbar-sticky bg-light">
                         <div className="navbar navbar-expand-lg navbar-light">
-                            <div className="container"><a className="navbar-brand d-none d-sm-block flex-shrink-0" href="index.html">
-                                <img src={logo} width="142" alt="Cartzilla" /></a>
-                                <a className="navbar-brand d-sm-none flex-shrink-0 me-2" href="index.html"><img src="img/logo-icon.png" width="74" alt="Cartzilla" /></a>
+                            <div className="container">
+                                <Link className="navbar-brand d-none d-sm-block flex-shrink-0" to="/">
+                                    <img src={logo} width="142" alt="Cartzilla" />
+                                </Link>
+                                <Link className="navbar-brand d-sm-none flex-shrink-0 me-2" to="/">
+                                    <img src="img/logo-icon.png" width="74" alt="Cartzilla" /></Link>
                                 <div className="input-group d-none d-lg-flex mx-4">
                                     <input className="form-control rounded-end pe-5" type="text" placeholder="Search for products" /><i className="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
                                 </div>
@@ -45,10 +49,10 @@ const Header = () => {
                                                 <div style={{ height: "15rem" }} data-simplebar data-simplebar-auto-hide="false">
                                                     <div className="widget-cart-item pb-2 border-bottom">
                                                         <button className="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                                        <div className="d-flex align-items-center"><a className="flex-shrink-0" href="shop-single-v1.html">
+                                                        <div className="d-flex align-items-center"><a className="flex-shrink-0" href="#">
                                                             <img src="img/shop/cart/widget/01.jpg" width="64" alt="Product" /></a>
                                                             <div className="ps-2">
-                                                                <h6 className="widget-product-title"><a href="shop-single-v1.html">Women Colorblock Sneakers</a></h6>
+                                                                <h6 className="widget-product-title"><a href="#">Women Colorblock Sneakers</a></h6>
                                                                 <div className="widget-product-meta"><span className="text-accent me-2">$150.<small>00</small></span><span className="text-muted">x 1</span></div>
                                                             </div>
                                                         </div>
@@ -57,9 +61,10 @@ const Header = () => {
 
                                                     <div className="widget-cart-item py-2 border-bottom">
                                                         <button className="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                                        <div className="d-flex align-items-center"><a className="flex-shrink-0" href="shop-single-v1.html"><img src="img/shop/cart/widget/04.jpg" width="64" alt="Product" /></a>
+                                                        <div className="d-flex align-items-center"><a className="flex-shrink-0" href="#">
+                                                            <img src="img/shop/cart/widget/04.jpg" width="64" alt="Product" /></a>
                                                             <div className="ps-2">
-                                                                <h6 className="widget-product-title"><a href="shop-single-v1.html">Cotton Polo Regular Fit</a></h6>
+                                                                <h6 className="widget-product-title"><a href="#">Cotton Polo Regular Fit</a></h6>
                                                                 <div className="widget-product-meta"><span className="text-accent me-2">$9.<small>00</small></span><span className="text-muted">x 1</span></div>
                                                             </div>
                                                         </div>
@@ -67,7 +72,7 @@ const Header = () => {
                                                 </div>
                                                 <div className="d-flex flex-wrap justify-content-between align-items-center py-3">
                                                     <div className="fs-sm me-2 py-2"><span className="text-muted">Subtotal:</span><span className="text-accent fs-base ms-1">$265.<small>00</small></span></div><a className="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i className="ci-arrow-right ms-1 me-n1"></i></a>
-                                                </div><a className="btn btn-primary btn-sm d-block w-100" href="checkout-details.html"><i className="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+                                                </div><a className="btn btn-primary btn-sm d-block w-100" href="#"><i className="ci-card me-2 fs-base align-middle"></i>Checkout</a>
                                             </div>
                                         </div>
                                     </div>

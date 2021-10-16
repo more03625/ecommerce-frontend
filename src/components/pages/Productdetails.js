@@ -1,9 +1,11 @@
 import React from 'react'
-
+import Header from '../layouts/Header'
+import ProductInfo from '../sections/product-details/ProductInfo';
 const Productdetails = () => {
     return (
         <>
-            Productdetails
+            <Header />
+            <ProductInfo/>
         </>
     )
 }

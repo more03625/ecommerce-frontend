@@ -6,7 +6,12 @@ export const Host = "http://localhost:6363/";
 export const Endpoints = {
     product:"api/products",
 }
-
+export const convertToSlug = (blogTitle) => {
+    return blogTitle
+        .toLowerCase()
+        .replace(/ /g, "-")
+        .replace(/[^\w-]+/g, "");
+};
 export const notify = (message, type) => {
     type === 'error' ? toast.error(message) : toast.success(message);
 } 
