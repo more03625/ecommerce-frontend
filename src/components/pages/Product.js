@@ -27,11 +27,11 @@ const Product = () => {
     useEffect(() => {
         getProducts()
     }, []);
-    const renderProducts = products && products.map((product) => {
+    const renderProducts = products && products.map((product, index) => {
         const { _id, categories, image, price, title, createdAt, description, updatedAt } = product;
         var productURL = `/product/${convertToSlug(title)}/${_id}`
         return (
-        <div className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+        <div key={index} className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
             <div className="card product-card">
                 {/* <button className="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
                     <i className="ci-heart"></i>
