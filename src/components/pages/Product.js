@@ -1,9 +1,32 @@
-import React from 'react'
-import QuickModel from '../sections/home/QuickModel'
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import QuickModel from '../sections/home/QuickModel';
+import axios from 'axios';
+import { Endpoints, Host, notify } from '../../helpers/comman_helpers';
+import { Toaster } from 'react-hot-toast';
+import {setProducts} from '../../redux/actions/productActions'
 const Product = () => {
+    const products = useSelector((state) => state.allProducts.products);
+    const dispatch = useDispatch();
+
+    const getProducts = async () => {
+        var url = Host + Endpoints.product;
+        const result = await axios.get(url);
+        if(result.data.error){
+            notify(result.data.title, 'error')
+        }else{
+            dispatch(setProducts(result.data.data));
+            notify(result.data.title, 'success')
+        }
+    }
+    useEffect(() => {
+        getProducts()
+    }, []);
+    
     return (
         <>
             <section className="container pt-md-3 pb-5 mb-md-3">
+                <Toaster/>
                 <h2 className="h3 text-center">Trending products</h2>
                 <div className="row pt-4 mx-n2">
                     <div className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
@@ -11,7 +34,7 @@ const Product = () => {
                             <button className="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist"><i className="ci-heart"></i></button><a className="card-img-top d-block overflow-hidden" href="shop-single-v1.html">
                                 <img src="img/shop/catalog/01.jpg" alt="Product" /></a>
                             <div className="card-body py-2"><a className="product-meta d-block fs-xs pb-1" href="#">Sneakers &amp; Keds</a>
-                                <h3 className="product-title fs-sm"><a href="shop-single-v1.html">Women Colorblock Sneakers</a></h3>
+                                <h3 className="product-title fs-sm"><a href="shop-single-v1.html">Rahul Colorblock Sneakers</a></h3>
                                 <div className="d-flex justify-content-between">
                                     <div className="product-price"><span className="text-accent">$154.<small>00</small></span></div>
                                     <div className="star-rating"><i className="star-rating-icon ci-star-filled active"></i><i className="star-rating-icon ci-star-filled active"></i><i className="star-rating-icon ci-star-filled active"></i><i className="star-rating-icon ci-star-half active"></i><i className="star-rating-icon ci-star"></i>
