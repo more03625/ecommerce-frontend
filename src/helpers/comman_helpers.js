@@ -5,12 +5,10 @@ export const Host = window.location.host === "localhost:3000" ? "http://localhos
 
 export const Endpoints = {
     product:"api/products",
+    signIn:"api/auth/login"
 }
-export const convertToSlug = (blogTitle) => {
-    return blogTitle
-        .toLowerCase()
-        .replace(/ /g, "-")
-        .replace(/[^\w-]+/g, "");
+export const convertToSlug = (title) => {
+    return title?.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
 };
 export const notify = (message, type) => {
     type === 'error' ? toast.error(message) : toast.success(message);

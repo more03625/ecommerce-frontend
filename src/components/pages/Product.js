@@ -33,11 +33,8 @@ const Product = () => {
         return (
         <div key={index} className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
             <div className="card product-card">
-                {/* <button className="btn-wishlist btn-sm" type="button" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to wishlist">
-                    <i className="ci-heart"></i>
-                </button> */}
-                    <Link className="card-img-top d-block overflow-hidden" to={productURL}>
-                        <img src={image} alt={title} />
+                    <Link className="card-img-top d-flex overflow-hidden justify-content-center" to={productURL}>
+                        <img className="justify-content-center" src={image} alt={title} style={{maxHeight:"300px", maxWidth:"300px", objectFit:"contain"}}/>
                     </Link>
                     <div className="card-body py-2">
                         <Link className="product-meta d-block fs-xs pb-1" to={productURL}>{categories}</Link>
@@ -46,7 +43,7 @@ const Product = () => {
                             </h3>
                         <div className="d-flex justify-content-between">
                             <div className="product-price">
-                                <span className="text-accent">{price}</span>
+                                <span className="text-accent">&#8377; {price}</span>
                             </div>
                         </div>
                     </div>
