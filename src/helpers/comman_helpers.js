@@ -35,3 +35,23 @@ export const logout = () => {
         window.location.href = '/admin/login';
     }, 2000)
 }
+export const uppercaseFirstLetter = (string) => {
+    return string && string[0].toUpperCase() + string.slice(1);
+}
+export const lowercaseFirstLetter = (string) => {
+    return string && string[0].toLowerCase() + string.slice(1);
+}
+export const convertToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(file);
+
+      fileReader.onload = () => {
+        resolve(fileReader.result);
+      };
+
+      fileReader.onerror = (error) => {
+        reject(error);
+      };
+    });
+  };

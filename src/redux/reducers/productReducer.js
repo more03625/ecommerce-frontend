@@ -21,3 +21,6 @@ export const selectedProductReducer = (state = {}, {type, payload}) => {
             return state;
     }
 }
+export const addProductReducer = (state = {} , {type, payload}) => {
+    console.log("addProductReducer ===> ", "type ===> ", type, "payload ===> ", payload)
+}

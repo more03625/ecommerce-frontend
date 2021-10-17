@@ -1,10 +1,12 @@
 import React from 'react'
 import footerLogo from '../../assets/images/logo/footer-logo-light.png';
-import paymentPartners from '../../assets/images/logo/payment-partners.png'
+import paymentPartners from '../../assets/images/logo/payment-partners.png';
+import { Toaster } from 'react-hot-toast';
 const Footer = () => {
     return (
         <>
             <footer className="footer bg-dark pt-5">
+                <Toaster/>
                 <div className="container">
                     <div className="row pb-2">
                         <div className="col-md-4 col-sm-6">

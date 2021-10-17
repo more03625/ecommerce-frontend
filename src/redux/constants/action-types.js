@@ -3,3 +3,6 @@ export const actionTypes = {
     SELECTED_PRODUCTS:'SELECTED_PRODUCTS',
     REMOVE_SELECTED_PRODUCTS:'REMOVE_SELECTED_PRODUCTS'
 }
+export const adminActionTypes = {
+    ADD_PRODUCTS:'ADD_PRODUCTS',
+}

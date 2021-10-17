@@ -34,7 +34,7 @@ const Product = () => {
         <div key={index} className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
             <div className="card product-card">
                     <Link className="card-img-top d-flex overflow-hidden justify-content-center" to={productURL}>
-                        <img className="justify-content-center" src={image} alt={title} style={{maxHeight:"300px", maxWidth:"300px", objectFit:"contain"}}/>
+                        <img className="justify-content-center" src={image[0]} alt={title} style={{maxHeight:"300px", maxWidth:"300px", objectFit:"contain"}}/>
                     </Link>
                     <div className="card-body py-2">
                         <Link className="product-meta d-block fs-xs pb-1" to={productURL}>{categories}</Link>

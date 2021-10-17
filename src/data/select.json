@@ -1,0 +1,18 @@
+{
+    "selectStatus":[
+        { "id":1 , "name":"active", "value":1 },
+        { "id":2 , "name":"inactive", "value":0 }
+    ],
+    "selectFlash":[
+        { "id":1 , "name":"yes", "value":1 },
+        { "id":2 , "name":"no", "value":0 }
+    ],
+    "selectSlotType":[
+        { "id":1 , "name":"hybrid"},
+        { "id":2 , "name":"dedicated"}
+    ],
+    "selectMemoryCardType":[
+        { "id":1 , "name":"micro sd"},
+        { "id":2 , "name":"sd card"}
+    ]
+}
