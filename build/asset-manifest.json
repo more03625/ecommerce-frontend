@@ -6,8 +6,8 @@
     "static/js/1.0f92d87c.chunk.js.map": "/static/js/1.0f92d87c.chunk.js.map",
     "main.js": "/static/js/main.902d4a1b.chunk.js",
     "main.js.map": "/static/js/main.902d4a1b.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.7d2e76e1.js",
-    "runtime-main.js.map": "/static/js/runtime-main.7d2e76e1.js.map",
+    "runtime-main.js": "/static/js/runtime-main.4b96d4ed.js",
+    "runtime-main.js.map": "/static/js/runtime-main.4b96d4ed.js.map",
     "static/js/4.05bd1ef6.chunk.js": "/static/js/4.05bd1ef6.chunk.js",
     "static/js/4.05bd1ef6.chunk.js.map": "/static/js/4.05bd1ef6.chunk.js.map",
     "static/js/5.3988e68e.chunk.js": "/static/js/5.3988e68e.chunk.js",
@@ -18,13 +18,13 @@
     "static/js/7.cb944da7.chunk.js.map": "/static/js/7.cb944da7.chunk.js.map",
     "static/js/8.e7aa83e1.chunk.js": "/static/js/8.e7aa83e1.chunk.js",
     "static/js/8.e7aa83e1.chunk.js.map": "/static/js/8.e7aa83e1.chunk.js.map",
-    "static/js/9.a1b7cf6c.chunk.js": "/static/js/9.a1b7cf6c.chunk.js",
-    "static/js/9.a1b7cf6c.chunk.js.map": "/static/js/9.a1b7cf6c.chunk.js.map",
+    "static/js/9.6f965902.chunk.js": "/static/js/9.6f965902.chunk.js",
+    "static/js/9.6f965902.chunk.js.map": "/static/js/9.6f965902.chunk.js.map",
     "static/css/10.6cd54866.chunk.css": "/static/css/10.6cd54866.chunk.css",
     "static/js/10.47ca9d46.chunk.js": "/static/js/10.47ca9d46.chunk.js",
     "static/js/10.47ca9d46.chunk.js.map": "/static/js/10.47ca9d46.chunk.js.map",
-    "static/js/11.3a103d07.chunk.js": "/static/js/11.3a103d07.chunk.js",
-    "static/js/11.3a103d07.chunk.js.map": "/static/js/11.3a103d07.chunk.js.map",
+    "static/js/11.f1d5bc21.chunk.js": "/static/js/11.f1d5bc21.chunk.js",
+    "static/js/11.f1d5bc21.chunk.js.map": "/static/js/11.f1d5bc21.chunk.js.map",
     "static/js/12.99b89bd2.chunk.js": "/static/js/12.99b89bd2.chunk.js",
     "static/js/12.99b89bd2.chunk.js.map": "/static/js/12.99b89bd2.chunk.js.map",
     "index.html": "/index.html",
@@ -40,7 +40,7 @@
     "static/media/payment-partners.928a3bee.png": "/static/media/payment-partners.928a3bee.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.7d2e76e1.js",
+    "static/js/runtime-main.4b96d4ed.js",
     "static/js/4.05bd1ef6.chunk.js",
     "static/js/main.902d4a1b.chunk.js"
   ]
