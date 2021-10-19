@@ -2,9 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { convertToSlug } from '../../../helpers/comman_helpers';
-const PageTitle = () => {
-    const product = useSelector((state) => state.product);
-    const { _id, title, image, price, description, categories, createdAt, updatedAt } = product;
+const PageTitle = (props) => {
+    // const product = useSelector((state) => state.product);
+    const { title }  = props
+    // const { _id, title, image, price, description, categories, createdAt, updatedAt } = product;
 
     return (
         <>

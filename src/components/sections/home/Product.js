@@ -1,17 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import QuickModel from '../sections/home/QuickModel';
-import { catchError, convertToSlug, Endpoints, Host, notify } from '../../helpers/comman_helpers';
+import QuickModel from './QuickModel';
+import { catchError, convertToSlug, Endpoints, Host, notify } from '../../../helpers/comman_helpers';
 import { Toaster } from 'react-hot-toast';
-import {setProducts} from '../../redux/actions/productActions';
+import {setProducts} from '../../../redux/actions/productActions';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Spinner from '../../layouts/Spinner';
 
 const Product = () => {
     const products = useSelector((state) => state.allProducts.products);
+    const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     const getProducts = async () => {
+        setLoading(true);
         try{
             var url = Host + Endpoints.product;
             const result = await axios.get(url);
@@ -23,6 +26,7 @@ const Product = () => {
         }catch(err){
             notify(catchError, 'error');
         }
+        setLoading(false);
     }
     useEffect(() => {
         getProducts()
@@ -69,7 +73,7 @@ const Product = () => {
                 <Toaster/>
                 <h2 className="h3 text-center">Trending products</h2>
                 <div className="row pt-4 mx-n2">
-                    {renderProducts}
+                    {loading ? <Spinner /> : renderProducts}
                 </div>
                 <div className="text-center pt-3">
                     <a className="btn btn-outline-accent" href="shop-grid-ls.html">More products<i className="ci-arrow-right ms-1"></i>

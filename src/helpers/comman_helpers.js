@@ -4,15 +4,15 @@ export const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.
 export const Host = window.location.host === "localhost:3000" ? "http://localhost:6363/" : "https://store-ecommerce-backend.herokuapp.com/"
 
 export const Endpoints = {
-    product:"api/products",
-    signIn:"api/auth/login"
+    product: "api/products",
+    signIn: "api/auth/login"
 }
 export const convertToSlug = (title) => {
     return title?.toLowerCase().replace(/ /g, "-").replace(/[^\w-]+/g, "");
 };
 export const notify = (message, type) => {
     type === 'error' ? toast.error(message) : toast.success(message);
-} 
+}
 export const catchError = "Something went wrong, Please try again!";
 export const rowLimit = 20;
 export const userTokenName = 'react-ecommerce-token';
@@ -31,7 +31,7 @@ export const cleanObject = (obj) => {
 export const logout = () => {
     notify("Logged out successfully!", 'success');
     localStorage.removeItem(userTokenName);
-    setTimeout(function(){
+    setTimeout(function () {
         window.location.href = '/admin/login';
     }, 2000)
 }
@@ -43,15 +43,18 @@ export const lowercaseFirstLetter = (string) => {
 }
 export const convertToBase64 = (file) => {
     return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
+        fileReader.onload = () => {
+            resolve(fileReader.result);
+        };
 
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
+        fileReader.onerror = (error) => {
+            reject(error);
+        };
     });
-  };
+};
+export const convertToINR = (number) => {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(number);
+}

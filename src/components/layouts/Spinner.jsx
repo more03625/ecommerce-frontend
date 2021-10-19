@@ -1,6 +1,7 @@
 import React from 'react'
 
-const Spinner = ({size}) => {
+const Spinner = (props) => {
+    const {size} = props
     return (
         <>
         {

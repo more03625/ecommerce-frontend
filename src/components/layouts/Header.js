@@ -38,11 +38,19 @@ const Header = () => {
                                 </div>
                                 <div className="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span className="navbar-toggler-icon"></span></button><a className="navbar-tool navbar-stuck-toggler" href="#"><span className="navbar-tool-tooltip">Expand menu</span>
-                                        <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-menu"></i></div></a><a className="navbar-tool d-none d-lg-flex" href="account-wishlist.html"><span className="navbar-tool-tooltip">Wishlist</span>
-                                        <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-heart"></i></div></a><a className="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
+                                        <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-menu"></i></div></a>
+
+                                    <a className="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
                                         <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-user"></i></div>
                                         <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div></a>
-                                    <div className="navbar-tool dropdown ms-3"><a className="navbar-tool-icon-box bg-secondary dropdown-toggle" href="shop-cart.html"><span className="navbar-tool-label">4</span><i className="navbar-tool-icon ci-cart"></i></a><a className="navbar-tool-text" href="shop-cart.html"><small>My Cart</small>$265.00</a>
+                                    <div className="navbar-tool dropdown ms-3">
+                                        <Link className="navbar-tool-icon-box bg-secondary dropdown-toggle" to="/cart">
+                                            <span className="navbar-tool-label">4</span><i className="navbar-tool-icon ci-cart"></i>
+                                        </Link>
+                                        <Link className="navbar-tool-text" to="/cart">
+                                            <small>My Cart</small>
+                                            $265.00
+                                        </Link>
 
                                         <div className="dropdown-menu dropdown-menu-end">
                                             <div className="widget widget-cart px-3 pt-2 pb-3" style={{ width: "20rem" }}>
@@ -72,7 +80,9 @@ const Header = () => {
                                                 </div>
                                                 <div className="d-flex flex-wrap justify-content-between align-items-center py-3">
                                                     <div className="fs-sm me-2 py-2"><span className="text-muted">Subtotal:</span><span className="text-accent fs-base ms-1">$265.<small>00</small></span></div><a className="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i className="ci-arrow-right ms-1 me-n1"></i></a>
-                                                </div><a className="btn btn-primary btn-sm d-block w-100" href="#"><i className="ci-card me-2 fs-base align-middle"></i>Checkout</a>
+                                                </div>
+                                                <Link className="btn btn-primary btn-sm d-block w-100" to="/checkout-details">
+                                                    <i className="ci-card me-2 fs-base align-middle"></i>Checkout</Link>
                                             </div>
                                         </div>
                                     </div>

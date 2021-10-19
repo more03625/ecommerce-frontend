@@ -4,7 +4,7 @@ import Brands from '../sections/home/Brands';
 import Blog from '../sections/home/Blog';
 import Footer from '../layouts/Footer';
 import Banner from '../sections/home/BannerAd';
-import Product from './Product';
+import Product from '../sections/home/Product';
 import Holiday from '../sections/home/Holiday';
 
 const Home = () => {
