@@ -1,14 +1,22 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { Toaster } from 'react-hot-toast';
+import { useSelector, useDispatch } from 'react-redux'
 import {selectStatus, selectFlash, selectMemoryCardType} from '../../../data/select.json';
-import { convertToINR, uppercaseFirstLetter } from '../../../helpers/comman_helpers';
-
+import { convertToINR, notify, uppercaseFirstLetter } from '../../../helpers/comman_helpers';
+import { addToCart } from '../../../redux/actions/productActions';
 const ProductDetails = () => {
     const product = useSelector((state) => state.product);
+    const dispatch = useDispatch();
+
     const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = product;
+    const handleCart = (product) => {
+        dispatch(addToCart(product))
+        notify('Product has been added to cart!', 'success');
+    }
     return (
         <>
             <div className="col-lg-5 pt-4 pt-lg-0">
+                <Toaster/>
                 <div className="product-details ms-auto pb-3">
                     <div className="d-flex justify-content-between align-items-center mb-2">
                         <a href="#reviews" data-scroll>
@@ -30,7 +38,7 @@ const ProductDetails = () => {
                     </div>
 
 
-                    <form className="mb-grid-gutter" method="post">
+                   
                         <div className="mb-3 d-flex align-items-center">
                             <select className="form-select me-3" style={{ width: "5rem" }}>
                                 <option value="1">1</option>
@@ -39,9 +47,9 @@ const ProductDetails = () => {
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <button className="btn btn-primary btn-shadow d-block w-100" type="submit"><i className="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                            <button className="btn btn-primary btn-shadow d-block w-100" type="button" onClick={() => handleCart(product)}><i className="ci-cart fs-lg me-2"></i>Add to Cart</button>
                         </div>
-                    </form>
+            
                     <div className="accordion mb-4" id="productPanels">
                         <div className="accordion-item">
                             <h3 className="accordion-header"><a className="accordion-button" href="#productInfo" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="productInfo"><i className="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Description</a></h3>

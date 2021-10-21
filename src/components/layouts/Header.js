@@ -2,10 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo/logo-dark.png';
 import AuthModel from './AuthModel';
+import {useSelector} from 'react-redux';
+
 const Header = () => {
+    const products = useSelector((state) => state.cartProducts);
     return (
         <>
-            <main className="page-wrapper">
+            <main className="page-wrapper mb-5">
                 <header className="shadow-sm">
                     <div className="topbar topbar-dark bg-dark">
                         <div className="container">
@@ -25,7 +28,7 @@ const Header = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="navbar-sticky bg-light">
+                    <div className="navbar-sticky bg-light navbar-stuck" id="navbar-header">
                         <div className="navbar navbar-expand-lg navbar-light">
                             <div className="container">
                                 <Link className="navbar-brand d-none d-sm-block flex-shrink-0" to="/">
@@ -45,11 +48,12 @@ const Header = () => {
                                         <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div></a>
                                     <div className="navbar-tool dropdown ms-3">
                                         <Link className="navbar-tool-icon-box bg-secondary dropdown-toggle" to="/cart">
-                                            <span className="navbar-tool-label">4</span><i className="navbar-tool-icon ci-cart"></i>
+                                            <span className="navbar-tool-label">{products.length}</span><i className="navbar-tool-icon ci-cart"></i>
                                         </Link>
                                         <Link className="navbar-tool-text" to="/cart">
                                             <small>My Cart</small>
-                                            $265.00
+                                            Show me
+                                            {/* $265.00 */}
                                         </Link>
 
                                         <div className="dropdown-menu dropdown-menu-end">
