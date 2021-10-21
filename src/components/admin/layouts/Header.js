@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import avtar from '../../../assets/images/logo/avatar.png';
-import darkLogo from '../../../assets/images/logo/logo-dark.png'
+import darkLogo from '../../../assets/images/logo/logo-dark.png';
+import logoIcon from '../../../assets/images/logo/logo-icon.png';
 const Header = () => {
     return (
         <>
@@ -11,7 +12,9 @@ const Header = () => {
             <Link className="navbar-brand d-none d-sm-block flex-shrink-0 me-4 order-lg-1" to="/admin/dashboard">
               <img src={darkLogo} width="142" alt="Cartzilla"/>
               </Link>
-              <a className="navbar-brand d-sm-none me-2 order-lg-1" href="index.html"><img src="img/logo-icon.png" width="74" alt="Cartzilla"/></a>
+              <Link className="navbar-brand d-sm-none me-2 order-lg-1" to="/">
+                <img src={logoIcon} width="74" alt="Cartzilla"/>
+              </Link>
             <div className="navbar-toolbar d-flex align-items-center order-lg-3">
               <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span className="navbar-toggler-icon"></span></button>
               <a className="navbar-tool d-none d-lg-flex" href="#" data-bs-toggle="collapse" data-bs-target="#searchBox" role="button" aria-expanded="false" aria-controls="searchBox"><span className="navbar-tool-tooltip">Search</span>

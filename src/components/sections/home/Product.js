@@ -79,10 +79,10 @@ const Product = () => {
                 <div className="row pt-4 mx-n2">
                     {loading ? <Spinner /> : renderProducts}
                 </div>
-                <div className="text-center pt-3">
+                {/* <div className="text-center pt-3">
                     <a className="btn btn-outline-accent" href="shop-grid-ls.html">More products<i className="ci-arrow-right ms-1"></i>
                     </a>
-                </div>
+                </div> */}
                 <QuickModel />
             </section>
         </>

@@ -15,52 +15,84 @@ const AddproductForm = () => {
 
     const isValid = () => {
         if (productInfo && productInfo.title === '' || productInfo.title === undefined) {
-            setError({ title: 'Please add a product name' });
+            var err = 'Please add a product name';
+            setError({ title: err });
+            notify(err, 'error');
             return false;
         } else if (productInfo.status === '' || productInfo.status === undefined) {
-            setError({ status: "Please select status" });
+            var err = 'Please select status';
+            setError({ status: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.description === '' || productInfo.description === undefined) {
-            setError({ description: "Please add description" });
+            var err = "Please add description";
+            setError({ description: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.original_price === '' || productInfo.original_price === undefined) {
-            setError({ original_price: "Please add original price" });
+            var err = "Please add original price";
+            setError({ original_price: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.discounted_price === '' || productInfo.discounted_price === undefined) {
-            setError({ discounted_price: "Please add discounted price" });
+            var err = "Please add discounted price";
+            setError({ discounted_price: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.internal_storage === '' || productInfo.internal_storage === undefined) {
-            setError({ internal_storage: "Please add internal storage" });
+            var err = "Please add internal storage";
+            setError({ internal_storage: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.ram === '' || productInfo.ram === undefined) {
-            setError({ ram: "Please add ram" });
+            var err = "Please add ram";
+            setError({ ram: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.expandable_storage === '' || productInfo.expandable_storage === undefined) {
-            setError({ expandable_storage: "Please add expandable storage" });
+            var err = "Please add expandable storage";
+            setError({ expandable_storage: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.memory_card_type === '' || productInfo.memory_card_type === undefined) {
-            setError({ memory_card_type: "Please add memory card_type" });
+            var err = "Please add memory card_type";
+            setError({ memory_card_type: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.slot_type === '' || productInfo.slot_type === undefined) {
-            setError({ slot_type: "Please add slot type" });
+            var err = "Please add slot type";
+            setError({ slot_type: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.primary_camera === '' || productInfo.primary_camera === undefined) {
-            setError({ primary_camera: "Please add primary camera" });
+            var err = "Please add primary camera";
+            setError({ primary_camera: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.secondary_camera === '' || productInfo.secondary_camera === undefined) {
-            setError({ secondary_camera: "Please add secondary camera" });
+            var err = "Please add secondary camera";
+            setError({ secondary_camera: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.flash === '' || productInfo.flash === undefined) {
-            setError({ flash: "Please add flash" });
+            var err = "Please add flash";
+            setError({ flash: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.modal_number === '' || productInfo.modal_number === undefined) {
-            setError({ modal_number: "Please add modal number" });
+            var err = "Please add modal number";
+            setError({ modal_number: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.modal_name === '' || productInfo.modal_name === undefined) {
-            setError({ modal_name: "Please add modal name" });
+            var err = "Please add modal name";
+            setError({ modal_name: err });
+            notify(err, 'error');
             return false
         } else if (productInfo.color === '' || productInfo.color === undefined) {
-            setError({ color: "Please add color" });
+            var err = "Please add color";
+            setError({ color: err });
+            notify(err, 'error');
             return false
         } else {
             return true;

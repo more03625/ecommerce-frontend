@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo/logo-dark.png';
 import AuthModel from './AuthModel';
 import {useSelector} from 'react-redux';
+import logoIcon from '../../assets/images/logo/logo-icon.png';
 
 const Header = () => {
     const products = useSelector((state) => state.cartProducts);
@@ -35,7 +36,7 @@ const Header = () => {
                                     <img src={logo} width="142" alt="Cartzilla" />
                                 </Link>
                                 <Link className="navbar-brand d-sm-none flex-shrink-0 me-2" to="/">
-                                    <img src="img/logo-icon.png" width="74" alt="Cartzilla" /></Link>
+                                    <img src={logoIcon} width="74" alt="Cartzilla" /></Link>
                                 <div className="input-group d-none d-lg-flex mx-4">
                                     <input className="form-control rounded-end pe-5" type="text" placeholder="Search for products" /><i className="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
                                 </div>
