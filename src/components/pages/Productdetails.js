@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../layouts/Footer';
 import Header from '../layouts/Header'
 import ProductInfo from '../sections/product-details/ProductInfo';
 const Productdetails = () => {
@@ -6,6 +7,7 @@ const Productdetails = () => {
         <>
             <Header />
             <ProductInfo/>
+            <Footer/>
         </>
     )
 }

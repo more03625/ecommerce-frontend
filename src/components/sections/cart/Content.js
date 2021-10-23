@@ -1,18 +1,27 @@
 import React from 'react'
 import CartProducts from './CartProducts';
 import SubTotal from './Subtotal';
-
-const Content = () => {
+import { connect } from 'react-redux';
+const Content = ({cart}) => {
     return (
         <>
             <div className="container pb-5 mb-2 mb-md-4">
                 <div className="row">
-                    <CartProducts />
+                    {
+                        cart.map((item) => (
+                            <CartProducts key={item._id} product={item}/>
+                        ))
+                    }
+                    
                     <SubTotal />
                 </div>
             </div>
         </>
     )
 }
-
-export default Content
+const mapStateToProps = (state) => {
+    return {
+        cart:state.shop.cart
+    }
+}
+export default connect(mapStateToProps)(Content)

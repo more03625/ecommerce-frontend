@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo/logo-dark.png';
 import AuthModel from './AuthModel';
-import {useSelector} from 'react-redux';
 import logoIcon from '../../assets/images/logo/logo-icon.png';
+import { connect } from 'react-redux';
+const Header = ({ cart }) => {
+    const [cartCount, setCartCount] = useState(0);
 
-const Header = () => {
-    const products = useSelector((state) => state.cartProducts);
+    useEffect(() => {
+        let count = 0;
+        cart.forEach(item => {
+            count += item.qty;
+        });
+        setCartCount(count);
+
+    }, [cart, cartCount])
     return (
         <>
             <main className="page-wrapper mb-5">
@@ -49,7 +57,7 @@ const Header = () => {
                                         <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div></a>
                                     <div className="navbar-tool dropdown ms-3">
                                         <Link className="navbar-tool-icon-box bg-secondary dropdown-toggle" to="/cart">
-                                            <span className="navbar-tool-label">{products.length}</span><i className="navbar-tool-icon ci-cart"></i>
+                                            <span className="navbar-tool-label">{cartCount}</span><i className="navbar-tool-icon ci-cart"></i>
                                         </Link>
                                         <Link className="navbar-tool-text" to="/cart">
                                             <small>My Cart</small>
@@ -136,4 +144,10 @@ const Header = () => {
     )
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    return  {
+        cart : state.shop.cart
+    }
+}
+
+export default connect(mapStateToProps)(Header)

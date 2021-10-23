@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import QuickModel from './QuickModel';
 import { catchError, convertToSlug, Endpoints, Host, notify, convertToINR } from '../../../helpers/comman_helpers';
-import { setProducts, addToCart } from '../../../redux/actions/productActions';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import Spinner from '../../layouts/Spinner';
+import {connect} from 'react-redux';
+import { Link } from 'react-router-dom';
+import { setProducts, addToCart, loadCurrentItem } from "../../../redux/Shopping/shopping-actions";
 
-const Product = () => {
-    const products = useSelector((state) => state.allProducts.products);
+const Product = ({products, addToCart, loadCurrentItem}) => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
-    const handleCart = (product) => {
-        dispatch(addToCart(product))
+
+    const handleCart = (id) => {
+        addToCart(id)
         notify('Product has been added to cart!', 'success');
     }
     const getProducts = async () => {
@@ -35,10 +36,11 @@ const Product = () => {
         getProducts()
     }, []);
     const renderProducts = products && products.map((product, index) => {
+
         const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = product;
         var productURL = `/product/${convertToSlug(title)}/${_id}`
         return (
-            <div key={index} className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4">
+            <div key={index} className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" onClick={() => loadCurrentItem(product)}>
                 <div className="card product-card">
                     <Link className="card-img-top d-flex overflow-hidden justify-content-center" to={productURL}>
                         <img className="justify-content-center" src={image && image[0]} alt={title} style={{ maxHeight: "300px", maxWidth: "300px", objectFit: "contain" }} />
@@ -56,7 +58,7 @@ const Product = () => {
                         </div>
                     </div>
                     <div className="card-body card-body-hidden">
-                        <button className="btn btn-primary btn-sm d-block w-100 mb-2" type="button" onClick={() => handleCart(product)}>
+                        <button className="btn btn-primary btn-sm d-block w-100 mb-2" type="button" onClick={() => handleCart(_id)}>
                             <i className="ci-cart fs-sm me-1"></i>Add to Cart
                         </button>
                         {/* <div className="text-center">
@@ -88,5 +90,15 @@ const Product = () => {
         </>
     )
 }
-
-export default Product
+const mapStateToProps = (state) => {
+    return {
+        products:state.shop.products
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCart: (id) => dispatch(addToCart(id)),
+        loadCurrentItem : (item) => dispatch(loadCurrentItem(item))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Product)

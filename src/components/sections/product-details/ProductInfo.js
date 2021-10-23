@@ -1,47 +1,19 @@
-import React, { useEffect } from 'react'
-import axios from 'axios';
-import { useParams } from 'react-router';
-import { catchError, Endpoints, Host, notify } from '../../../helpers/comman_helpers';
+import React from 'react'
 import ProductDetails from './ProductDetails';
-import { selectedProducts, removeSelectedProduct } from '../../../redux/actions/productActions';
-import { useDispatch, useSelector } from 'react-redux';
 import PageTitle from './PageTitle';
 import Spinner from '../../layouts/Spinner';
 import "react-image-gallery/styles/css/image-gallery.css";
+import { connect } from 'react-redux';
 
-const images = [];
-const ProductInfo = () => {
-    const { productID } = useParams();
-    const dispatch = useDispatch();
-    const product = useSelector((state) => state.product);
-    const { _id, title, image, price, description, categories, createdAt, updatedAt } = product;
-  
-    const getProductByID = async () => {
-        try {
-            var url = Host + Endpoints.product + "/find/" + productID
-            const result = await axios.get(url);
-            if (result.data.error) {
-                notify(result.data.title, 'error');
-            } else {
-                dispatch(selectedProducts(result.data.data));
-            }
-        } catch (err) {
-            notify(catchError, 'error');
-        }
-    }
-    useEffect(() => {
-        productID && productID !== '' && getProductByID();
-        
-        return () => {
-            dispatch(removeSelectedProduct()); // Remove the selected product when component is destroyed!
-            
-        }
-    }, [productID]);
+const ProductInfo = (props) => {
+
+    const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = props.currentItem;
+
     return (
         <>
         <PageTitle/>
             <div className="container">
-                {Object.keys(product).length === 0 ? ( <Spinner /> ) : (
+                {Object.keys(props.currentItem).length === 0 ? ( <Spinner /> ) : (
                     <div className="bg-light shadow-lg rounded-3 px-4 py-3 mb-5">
                         <div className="px-lg-3">
                             <div className="row">
@@ -59,5 +31,9 @@ const ProductInfo = () => {
         </>
     )
 }
-
-export default ProductInfo
+const mapStateToProps = state => {
+    return {
+        currentItem : state.shop.currentItem
+    }
+}
+export default connect(mapStateToProps) (ProductInfo)

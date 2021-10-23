@@ -1,22 +1,33 @@
-import React from 'react'
-import { Toaster } from 'react-hot-toast';
-import { useSelector, useDispatch } from 'react-redux'
-import {selectStatus, selectFlash, selectMemoryCardType} from '../../../data/select.json';
+import React, {useState} from 'react'
+import { selectStatus, selectFlash, selectMemoryCardType } from '../../../data/select.json';
 import { convertToINR, notify, uppercaseFirstLetter } from '../../../helpers/comman_helpers';
-import { addToCart } from '../../../redux/actions/productActions';
-const ProductDetails = () => {
-    const product = useSelector((state) => state.product);
-    const dispatch = useDispatch();
+import { connect } from 'react-redux';
 
-    const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = product;
-    const handleCart = (product) => {
-        dispatch(addToCart(product))
+import { addToCart, adjustQty } from '../../../redux/Shopping/shopping-actions';
+const ProductDetails = (props) => {
+
+    const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = props.currentItem;
+
+    const [userSelectQty, setUserSelectQty] = useState({});
+
+    const handleChange = (e) => {
+        setUserSelectQty({ ...userSelectQty, [e.target.name] : e.target.value });
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        // add to cart
+        // adjust qty
+
+        props.adJustQty(_id, userSelectQty.qty)
+        
+        props.addToCart(_id)
         notify('Product has been added to cart!', 'success');
     }
     return (
         <>
             <div className="col-lg-5 pt-4 pt-lg-0">
-                <Toaster/>
                 <div className="product-details ms-auto pb-3">
                     <div className="d-flex justify-content-between align-items-center mb-2">
                         <a href="#reviews" data-scroll>
@@ -29,27 +40,27 @@ const ProductDetails = () => {
                     </div>
 
                     <div className="mb-3">
-                        <span className="h3 fw-normal text-accent me-1">{ convertToINR(discounted_price)}</span>
+                        <span className="h3 fw-normal text-accent me-1">{convertToINR(discounted_price)}</span>
                         <del className="text-muted fs-lg me-3">{convertToINR(original_price)}</del>
                     </div>
                     <div className="fs-sm mb-4">
                         <span className="text-heading fw-medium me-1">Color:</span>
                         <span className="text-muted" id="colorOption">{color}</span>
                     </div>
-
-
-                   
+                    <form onSubmit={handleSubmit}>
                         <div className="mb-3 d-flex align-items-center">
-                            <select className="form-select me-3" style={{ width: "5rem" }}>
+                            <select className="form-select me-3" style={{ width: "5rem" }} name="qty" onChange={(e) => handleChange(e)}>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <button className="btn btn-primary btn-shadow d-block w-100" type="button" onClick={() => handleCart(product)}><i className="ci-cart fs-lg me-2"></i>Add to Cart</button>
+                            <button className="btn btn-primary btn-shadow d-block w-100" type="submit">
+                                <i className="ci-cart fs-lg me-2"></i>Add to Cart
+                            </button>
                         </div>
-            
+                    </form>
                     <div className="accordion mb-4" id="productPanels">
                         <div className="accordion-item">
                             <h3 className="accordion-header"><a className="accordion-button" href="#productInfo" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="productInfo"><i className="ci-announcement text-muted fs-lg align-middle mt-n1 me-2"></i>Description</a></h3>
@@ -125,8 +136,8 @@ const ProductDetails = () => {
                                         </div>
                                         <div>
                                             {selectFlash.filter((x) => x.value == flash).map((value, index) => (
-                                                        uppercaseFirstLetter(value.name)
-                                                ))}
+                                                uppercaseFirstLetter(value.name)
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-between border-bottom py-2">
@@ -135,8 +146,8 @@ const ProductDetails = () => {
                                         </div>
                                         <div>
                                             {selectMemoryCardType.filter((x) => x.id == memory_card_type).map((value, index) => (
-                                                        uppercaseFirstLetter(value.name)
-                                                ))}
+                                                uppercaseFirstLetter(value.name)
+                                            ))}
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-between border-bottom py-2">
@@ -151,7 +162,7 @@ const ProductDetails = () => {
                                         </div>
                                         <div>
                                             {selectStatus.filter((x) => x.value == status).map((value, index) => (
-                                                    uppercaseFirstLetter(value.name)
+                                                uppercaseFirstLetter(value.name)
                                             ))}
                                         </div>
                                     </div>
@@ -180,5 +191,15 @@ const ProductDetails = () => {
         </>
     )
 }
-
-export default ProductDetails
+const mapStateToProps = state => {
+    return {
+        currentItem: state.shop.currentItem
+    }
+}
+const mapDispatchToProps = dispatch => {
+    return {
+        addToCart : (id) => dispatch(addToCart(id)),
+        adJustQty: (id, value) => dispatch(adjustQty(id, value))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails)
