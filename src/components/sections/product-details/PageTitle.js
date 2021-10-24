@@ -1,12 +1,8 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { convertToSlug } from '../../../helpers/comman_helpers';
+import { convertToSlug, uppercaseFirstLetter } from '../../../helpers/comman_helpers';
 const PageTitle = (props) => {
-    // const product = useSelector((state) => state.product);
     const { title }  = props
-    // const { _id, title, image, price, description, categories, createdAt, updatedAt } = product;
-
     return (
         <>
             <div className="page-title-overlap bg-dark pt-4">
@@ -19,9 +15,12 @@ const PageTitle = (props) => {
                                         <i className="ci-home"></i>Home
                                     </Link>
                                 </li>
-                                <li className="breadcrumb-item text-nowrap"><a href="#">Product</a>
+                                <li className="breadcrumb-item text-nowrap">
+                                    <Link to="#">{uppercaseFirstLetter(window.location.pathname.split('/')[1])}</Link>
                                 </li>
-                                <li className="breadcrumb-item text-nowrap active" aria-current="page">{convertToSlug(title)?.slice(0.25) + "..."}</li>
+                                {
+                                    title && <li className="breadcrumb-item text-nowrap active" aria-current="page">{convertToSlug(title)?.slice(0.25) + "..."}</li>
+                                }
                             </ol>
                         </nav>
                     </div>

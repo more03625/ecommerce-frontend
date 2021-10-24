@@ -8,7 +8,7 @@ const ProductDetails = (props) => {
 
     const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = props.currentItem;
 
-    const [userSelectQty, setUserSelectQty] = useState({});
+    const [userSelectQty, setUserSelectQty] = useState({qty: 1});
 
     const handleChange = (e) => {
         setUserSelectQty({ ...userSelectQty, [e.target.name] : e.target.value });
@@ -16,12 +16,7 @@ const ProductDetails = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // add to cart
-        // adjust qty
-
         props.adJustQty(_id, userSelectQty.qty)
-        
         props.addToCart(_id)
         notify('Product has been added to cart!', 'success');
     }
@@ -49,7 +44,7 @@ const ProductDetails = (props) => {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3 d-flex align-items-center">
-                            <select className="form-select me-3" style={{ width: "5rem" }} name="qty" onChange={(e) => handleChange(e)}>
+                            <select className="form-select me-3" style={{ width: "5rem" }} name="qty" onChange={(e) => handleChange(e)} defaultValue={userSelectQty}>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

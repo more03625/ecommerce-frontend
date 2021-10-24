@@ -19,6 +19,7 @@ export const addToCart = (itemID) => {
 }
 
 export const removeFromCart = (itemID) => {
+    console.log("itemID bro===> ", itemID)
     return {
         type: actionTypes.REMOVE_FROM_CART,
         payload: {
@@ -28,8 +29,7 @@ export const removeFromCart = (itemID) => {
 }
 
 export const adjustQty = (itemID, value) => {
-    console.log("itemID ===> ", itemID)
-    console.log("value ===> ", value)
+
     return {
         type: actionTypes.ADJUST_QTY,
         payload: {

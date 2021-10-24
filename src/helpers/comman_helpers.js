@@ -13,6 +13,9 @@ export const convertToSlug = (title) => {
 export const notify = (message, type) => {
     type === 'error' ? toast.error(message) : toast.success(message);
 }
+export const errors = {
+    noProducts:"There are no products in your cart!",
+}
 export const catchError = "Something went wrong, Please try again!";
 export const rowLimit = 20;
 export const userTokenName = 'react-ecommerce-token';

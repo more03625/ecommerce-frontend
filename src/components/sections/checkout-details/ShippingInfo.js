@@ -18,9 +18,9 @@ const ShippingInfo = () => {
                         <div className="d-sm-flex justify-content-between align-items-center bg-secondary p-4 rounded-3 mb-grid-gutter">
                             <div className="d-flex align-items-center">
                                 <div className="img-thumbnail rounded-circle position-relative flex-shrink-0"><span className="badge bg-warning position-absolute end-0 mt-n2" data-bs-toggle="tooltip" title="Reward points">384</span>
-                                <img className="rounded-circle" src="img/shop/account/avatar.jpg" width="90" alt="Susan Gardner" /></div>
+                                <img className="rounded-circle" src="https://avatars.githubusercontent.com/u/25549118?v=4" width="90" alt="Rahul More" /></div>
                                 <div className="ps-3">
-                                    <h3 className="fs-base mb-0">Susan Gardner</h3><span className="text-accent fs-sm">s.gardner@example.com</span>
+                                    <h3 className="fs-base mb-0">Rahul More</h3><span className="text-accent fs-sm">more03625@gmail.com</span>
                                 </div>
                             </div><a className="btn btn-light btn-sm btn-shadow mt-3 mt-sm-0" href="account-profile.html"><i className="ci-edit me-2"></i>Edit profile</a>
                         </div>

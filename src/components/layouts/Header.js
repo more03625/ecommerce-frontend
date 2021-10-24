@@ -1,20 +1,60 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo/logo-dark.png';
 import AuthModel from './AuthModel';
 import logoIcon from '../../assets/images/logo/logo-icon.png';
 import { connect } from 'react-redux';
-const Header = ({ cart }) => {
-    const [cartCount, setCartCount] = useState(0);
+import { convertToINR, convertToSlug, errors } from '../../helpers/comman_helpers';
+import { loadCurrentItem, removeFromCart } from '../../redux/Shopping/shopping-actions';
+const Header = ({ cart, removeFromCart }) => {
 
-    useEffect(() => {
-        let count = 0;
-        cart.forEach(item => {
-            count += item.qty;
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
+
+    const updateValues = () => {
+        var items = 0;
+        var price = 0;
+
+        cart && cart.forEach(item => {
+            items += item.qty;
+            price += item.qty * item.discounted_price
         });
-        setCartCount(count);
+        setTotalPrice(price);
+        setTotalItems(items);
+    }
+   
+    useEffect(() => {
+        updateValues();
+    }, [cart, totalItems, totalItems, setTotalPrice, setTotalItems]);
 
-    }, [cart, cartCount])
+    const cartProducts = cart.length > 0 ? (
+        cart && cart.map((product, index) => {
+            const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id, qty } = product;
+            var productURL = `/product/${convertToSlug(title)}/${_id}`
+
+            return (
+                <div key={index} className="widget-cart-item border-bottom" onClick={() => loadCurrentItem(product)}>
+                    <button className="btn-close text-danger" type="button" aria-label="Remove" onClick={() => removeFromCart(_id)}>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div className="d-flex align-items-center">
+                        <Link className="flex-shrink-0" to={productURL} style={{ maxWidth: "35px" }}>
+                            <img src={image[0]} width="64" alt={title} />
+                        </Link>
+                        <div className="ps-2">
+                            <h6 className="widget-product-title">
+                                <Link to={productURL}>{title}</Link>
+                            </h6>
+                            <div className="widget-product-meta">
+                                <span className="text-accent me-2">{convertToINR(discounted_price)}</span>
+                                <span className="text-muted">x {qty}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+    ) : ( errors.noProducts )
     return (
         <>
             <main className="page-wrapper mb-5">
@@ -57,7 +97,7 @@ const Header = ({ cart }) => {
                                         <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div></a>
                                     <div className="navbar-tool dropdown ms-3">
                                         <Link className="navbar-tool-icon-box bg-secondary dropdown-toggle" to="/cart">
-                                            <span className="navbar-tool-label">{cartCount}</span><i className="navbar-tool-icon ci-cart"></i>
+                                            <span className="navbar-tool-label">{totalItems}</span><i className="navbar-tool-icon ci-cart"></i>
                                         </Link>
                                         <Link className="navbar-tool-text" to="/cart">
                                             <small>My Cart</small>
@@ -68,31 +108,16 @@ const Header = ({ cart }) => {
                                         <div className="dropdown-menu dropdown-menu-end">
                                             <div className="widget widget-cart px-3 pt-2 pb-3" style={{ width: "20rem" }}>
                                                 <div style={{ height: "15rem" }} data-simplebar data-simplebar-auto-hide="false">
-                                                    <div className="widget-cart-item pb-2 border-bottom">
-                                                        <button className="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                                        <div className="d-flex align-items-center"><a className="flex-shrink-0" href="#">
-                                                            <img src="img/shop/cart/widget/01.jpg" width="64" alt="Product" /></a>
-                                                            <div className="ps-2">
-                                                                <h6 className="widget-product-title"><a href="#">Women Colorblock Sneakers</a></h6>
-                                                                <div className="widget-product-meta"><span className="text-accent me-2">$150.<small>00</small></span><span className="text-muted">x 1</span></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div className="widget-cart-item py-2 border-bottom">
-                                                        <button className="btn-close text-danger" type="button" aria-label="Remove"><span aria-hidden="true">&times;</span></button>
-                                                        <div className="d-flex align-items-center"><a className="flex-shrink-0" href="#">
-                                                            <img src="img/shop/cart/widget/04.jpg" width="64" alt="Product" /></a>
-                                                            <div className="ps-2">
-                                                                <h6 className="widget-product-title"><a href="#">Cotton Polo Regular Fit</a></h6>
-                                                                <div className="widget-product-meta"><span className="text-accent me-2">$9.<small>00</small></span><span className="text-muted">x 1</span></div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    {cartProducts}
                                                 </div>
                                                 <div className="d-flex flex-wrap justify-content-between align-items-center py-3">
-                                                    <div className="fs-sm me-2 py-2"><span className="text-muted">Subtotal:</span><span className="text-accent fs-base ms-1">$265.<small>00</small></span></div><a className="btn btn-outline-secondary btn-sm" href="shop-cart.html">Expand cart<i className="ci-arrow-right ms-1 me-n1"></i></a>
+                                                    <div className="fs-sm me-2 py-2">
+                                                        <span className="text-muted">Subtotal:</span>
+                                                        <span className="text-accent fs-base ms-1">{convertToINR(totalPrice)}</span>
+                                                    </div>
+                                                    <Link className="btn btn-outline-secondary btn-sm" to="/cart">Expand cart
+                                                        <i className="ci-arrow-right ms-1 me-n1"></i>
+                                                    </Link>
                                                 </div>
                                                 <Link className="btn btn-primary btn-sm d-block w-100" to="/checkout-details">
                                                     <i className="ci-card me-2 fs-base align-middle"></i>Checkout</Link>
@@ -105,34 +130,10 @@ const Header = ({ cart }) => {
                         <div className="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
                             <div className="container">
                                 <div className="collapse navbar-collapse" id="navbarCollapse">
-                                    <div className="input-group d-lg-none my-3"><i className="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
+                                    <div className="input-group d-lg-none my-3">
+                                        <i className="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
                                         <input className="form-control rounded-start" type="text" placeholder="Search for products" />
                                     </div>
-                                    {/* <ul className="navbar-nav navbar-mega-nav pe-lg-2 me-lg-2">
-                                        <li className="nav-item dropdown"><a className="nav-link dropdown-toggle ps-lg-0" href="#" data-bs-toggle="dropdown"><i className="ci-view-grid me-2"></i>Departments</a>
-                                            <div className="dropdown-menu px-2 pb-4">
-                                                <div className="d-flex flex-wrap flex-sm-nowrap">
-                                                    <div className="mega-dropdown-column pt-3 pt-sm-4 px-2 px-lg-3">
-                                                        <div className="widget widget-links"><a className="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/01.jpg" alt="Clothing" /></a>
-                                                            <h6 className="fs-base mb-2">Clothing</h6>
-                                                            <ul className="widget-list">
-                                                                <li className="widget-list-item mb-1"><a className="widget-list-link" href="#">Women's clothing</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                    <div className="mega-dropdown-column pt-4 px-2 px-lg-3">
-                                                        <div className="widget widget-links"><a className="d-block overflow-hidden rounded-3 mb-3" href="#"><img src="img/shop/departments/02.jpg" alt="Shoes" /></a>
-                                                            <h6 className="fs-base mb-2">Shoes</h6>
-                                                            <ul className="widget-list">
-                                                                <li className="widget-list-item mb-1"><a className="widget-list-link" href="#">Men's shoes</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </li>
-                                    </ul> */}
                                 </div>
                             </div>
                         </div>
@@ -145,9 +146,14 @@ const Header = ({ cart }) => {
 }
 
 const mapStateToProps = (state) => {
-    return  {
-        cart : state.shop.cart
+    return {
+        cart: state.shop.cart
     }
 }
-
-export default connect(mapStateToProps)(Header)
+const mapDispatchToProps = dispatch => {
+    return {
+        loadCurrentItem: (item) => dispatch(loadCurrentItem(item)),
+        removeFromCart: (id) => dispatch(removeFromCart(id))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Header)

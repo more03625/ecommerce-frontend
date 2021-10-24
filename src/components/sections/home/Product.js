@@ -51,9 +51,9 @@ const Product = ({products, addToCart, loadCurrentItem}) => {
                             <Link to={productURL}>{title}</Link>
                         </h3>
                         <div className="d-flex justify-content-between">
-                            <div class="product-price">
-                                <span class="text-accent">{convertToINR(discounted_price)}</span>{" "}
-                                <del class="fs-sm text-muted">{convertToINR(original_price)}</del>
+                            <div className="product-price">
+                                <span className="text-accent">{convertToINR(discounted_price)}</span>{" "}
+                                <del className="fs-sm text-muted">{convertToINR(original_price)}</del>
                             </div>
                         </div>
                     </div>

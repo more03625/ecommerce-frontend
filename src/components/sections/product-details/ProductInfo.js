@@ -11,7 +11,7 @@ const ProductInfo = (props) => {
 
     return (
         <>
-        <PageTitle/>
+        <PageTitle title={title}/>
             <div className="container">
                 {Object.keys(props.currentItem).length === 0 ? ( <Spinner /> ) : (
                     <div className="bg-light shadow-lg rounded-3 px-4 py-3 mb-5">

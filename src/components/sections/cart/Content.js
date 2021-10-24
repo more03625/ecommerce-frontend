@@ -2,9 +2,11 @@ import React from 'react'
 import CartProducts from './CartProducts';
 import SubTotal from './Subtotal';
 import { connect } from 'react-redux';
+import PageTitle from '../product-details/PageTitle';
 const Content = ({cart}) => {
     return (
         <>
+        <PageTitle />
             <div className="container pb-5 mb-2 mb-md-4">
                 <div className="row">
                     {

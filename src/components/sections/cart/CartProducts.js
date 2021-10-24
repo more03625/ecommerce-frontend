@@ -8,7 +8,6 @@ const CartProducts = (props) => {
 
   const [input, setInput] = useState(qty)
   const onChangeHandler = (e) => {
-    console.log("BBB ==> ", e.target.value)
     setInput(e.target.value);
     props.adjustQty(_id, e.target.value)
   }
@@ -29,7 +28,7 @@ const CartProducts = (props) => {
               <div className="fs-sm"><span className="text-muted me-2">Ram:</span>{ram} GB</div>
               <div className="fs-sm"><span className="text-muted me-2">Color:</span>{color}</div>
               <div className="fs-lg text-accent pt-2">{convertToINR(discounted_price)}
-                <del class="fs-sm text-muted">{convertToINR(original_price)}</del>
+                <del className="fs-sm text-muted">{convertToINR(original_price)}</del>
               </div>
             </div>
           </div>
