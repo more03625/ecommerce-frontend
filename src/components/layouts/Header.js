@@ -132,10 +132,12 @@ const Header = ({ cart, removeFromCart }) => {
                         <div className="navbar navbar-expand-lg navbar-light navbar-stuck-menu mt-n2 pt-0 pb-2">
                             <div className="container">
                                 <div className="collapse navbar-collapse" id="navbarCollapse">
-                                    <div className="input-group d-lg-none my-3">
-                                        <i className="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
-                                        <input className="form-control rounded-start" type="text" placeholder="Search for products" />
-                                    </div>
+                                    <form method="get" action="/results">
+                                        <div className="input-group d-lg-none my-3">
+                                            <i className="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
+                                            <input className="form-control rounded-start" type="text" placeholder="Search for products" name="search_query" />
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
