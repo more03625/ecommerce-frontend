@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 
 export const EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-export const Host = window.location.host === "localhost:3000" ? "http://localhost:6363/" : "https://store-ecommerce-backend.herokuapp.com/"
+export const Host = window.location.host === "localhost:3001" ? "http://localhost:6363/" : "https://store-ecommerce-backend.herokuapp.com/"
 
 export const Endpoints = {
     product: "api/products",
