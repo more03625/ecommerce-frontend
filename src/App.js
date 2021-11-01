@@ -3,23 +3,25 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Spinner from './components/layouts/Spinner';
 const App = () => {
 
-    const Home              = lazy(() => import('./components/pages/Home'));
-    const Productdetails    = lazy(() => import('./components/pages/Productdetails'));
-    const Cart              = lazy(() => import('./components/pages/Cart'));
-    const Checkoutdetails   = lazy(() => import('./components/pages/Checkoutdetails'));
-    const Thankyoufororder   = lazy(() => import('./components/pages/Thankyoufororder'));
-    const PageNotFound      = lazy(() => import('./components/pages/PageNotFound'));
+    const Home = lazy(() => import('./components/pages/Home'));
+    const Productdetails = lazy(() => import('./components/pages/Productdetails'));
+    const Cart = lazy(() => import('./components/pages/Cart'));
+    const Checkoutdetails = lazy(() => import('./components/pages/Checkoutdetails'));
+    const Thankyoufororder = lazy(() => import('./components/pages/Thankyoufororder'));
+    const PageNotFound = lazy(() => import('./components/pages/PageNotFound'));
+    const Results = lazy(() => import('./components/pages/Results'));
 
     // Admin
-    const Dashboard         = lazy(() => import('./components/admin/pages/Dashboard'))
-    const Addproduct        = lazy(() => import('./components/admin/pages/Addproducts'));
-    const Products          = lazy(() => import('./components/admin/pages/Products'));
-    
+    const Dashboard = lazy(() => import('./components/admin/pages/Dashboard'))
+    const Addproduct = lazy(() => import('./components/admin/pages/Addproducts'));
+    const Products = lazy(() => import('./components/admin/pages/Products'));
+
     return (
         <Router>
-            <Suspense fallback={<Spinner/>}>
+            <Suspense fallback={<Spinner />}>
                 <Switch>
                     <Route exact path="/" component={Home} />
+                    <Route exact path="/results" component={Results} />
                     <Route exact path="/product/:slug/:productID" component={Productdetails} />
                     <Route exact path="/cart" component={Cart} />
                     <Route exact path="/checkout-details" component={Checkoutdetails} />
@@ -35,6 +37,7 @@ const App = () => {
                 </Switch>
             </Suspense>
         </Router>
+
     )
 }
 

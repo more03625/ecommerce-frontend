@@ -61,11 +61,7 @@ const Product = ({products, addToCart, loadCurrentItem}) => {
                         <button className="btn btn-primary btn-sm d-block w-100 mb-2" type="button" onClick={() => handleCart(_id)}>
                             <i className="ci-cart fs-sm me-1"></i>Add to Cart
                         </button>
-                        {/* <div className="text-center">
-                            <a className="nav-link-style fs-ms" href="#quick-view" data-bs-toggle="modal">
-                                <i className="ci-eye align-middle me-1"></i>Quick view
-                            </a>
-                        </div> */}
+                      
                     </div>
                 </div>
                 <hr className="d-sm-none" />
@@ -81,10 +77,6 @@ const Product = ({products, addToCart, loadCurrentItem}) => {
                 <div className="row pt-4 mx-n2">
                     {loading ? <Spinner /> : renderProducts}
                 </div>
-                {/* <div className="text-center pt-3">
-                    <a className="btn btn-outline-accent" href="shop-grid-ls.html">More products<i className="ci-arrow-right ms-1"></i>
-                    </a>
-                </div> */}
                 <QuickModel />
             </section>
         </>

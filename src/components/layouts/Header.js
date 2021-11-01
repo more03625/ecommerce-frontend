@@ -22,7 +22,7 @@ const Header = ({ cart, removeFromCart }) => {
         setTotalPrice(price);
         setTotalItems(items);
     }
-   
+
     useEffect(() => {
         updateValues();
     }, [cart, totalItems, totalItems, setTotalPrice, setTotalItems]);
@@ -54,7 +54,7 @@ const Header = ({ cart, removeFromCart }) => {
                 </div>
             )
         })
-    ) : ( errors.noProducts )
+    ) : (errors.noProducts)
     return (
         <>
             <main className="page-wrapper mb-5">
@@ -85,9 +85,11 @@ const Header = ({ cart, removeFromCart }) => {
                                 </Link>
                                 <Link className="navbar-brand d-sm-none flex-shrink-0 me-2" to="/">
                                     <img src={logoIcon} width="74" alt="Cartzilla" /></Link>
-                                <div className="input-group d-none d-lg-flex mx-4">
-                                    <input className="form-control rounded-end pe-5" type="text" placeholder="Search for products" /><i className="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
-                                </div>
+                                <form method="get" action="/results">
+                                    <div className="input-group d-none d-lg-flex mx-4">
+                                        <input className="form-control rounded-end pe-5" type="text" placeholder="Search for products" name="search_query" /><i className="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
+                                    </div>
+                                </form>
                                 <div className="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span className="navbar-toggler-icon"></span></button><a className="navbar-tool navbar-stuck-toggler" href="#"><span className="navbar-tool-tooltip">Expand menu</span>
                                         <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-menu"></i></div></a>
