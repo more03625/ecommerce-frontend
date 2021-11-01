@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Product from './Product';
 import { useDispatch, connect } from 'react-redux';
-import { setProducts, addToCart, loadCurrentItem } from "../../../redux/Shopping/shopping-actions";
+import { setProducts} from "../../../redux/Shopping/shopping-actions";
 import { Host, Endpoints, notify, catchError } from '../../../helpers/comman_helpers';
 import axios from 'axios';
 
