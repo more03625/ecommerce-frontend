@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { convertToINR, convertToSlug, errors } from '../../helpers/comman_helpers';
 import { loadCurrentItem, removeFromCart } from '../../redux/Shopping/shopping-actions';
 const Header = ({ cart, removeFromCart }) => {
-
+    const params = new URLSearchParams(window.location.search);
+    let query = params.get('search_query')?.trim();
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
 
@@ -87,7 +88,8 @@ const Header = ({ cart, removeFromCart }) => {
                                     <img src={logoIcon} width="74" alt="Cartzilla" /></Link>
                                 <form method="get" action="/results">
                                     <div className="input-group d-none d-lg-flex mx-4">
-                                        <input className="form-control rounded-end pe-5" type="text" placeholder="Search for products" name="search_query" /><i className="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
+                                        <input className="form-control rounded-end pe-5" type="text" placeholder="Apple iphone..." name="search_query" defaultValue={query}/>
+                                        <i className="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
                                     </div>
                                 </form>
                                 <div className="navbar-toolbar d-flex flex-shrink-0 align-items-center">
@@ -135,7 +137,7 @@ const Header = ({ cart, removeFromCart }) => {
                                     <form method="get" action="/results">
                                         <div className="input-group d-lg-none my-3">
                                             <i className="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
-                                            <input className="form-control rounded-start" type="text" placeholder="Search for products" name="search_query" />
+                                            <input className="form-control rounded-start" type="text" placeholder="Apple iphone..." name="search_query" defaultValue={query}/>
                                         </div>
                                     </form>
                                 </div>
