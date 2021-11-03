@@ -78,23 +78,14 @@ const Footer = () => {
             {/*Toolbar for handheld devices (Default)*/}
             <div className="handheld-toolbar" >
                 <div className="d-table table-layout-fixed w-100">
-                    <a className="d-table-cell handheld-toolbar-item" href="account-wishlist.html">
-                        <span className="handheld-toolbar-icon">
-                            <i className="ci-heart"></i>
-                        </span>
-                        <span className="handheld-toolbar-label">Wishlist</span>
-                    </a>
+
                     <a className="d-table-cell handheld-toolbar-item" href="#" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" onClick={window.scrollTo(0, 0)}>
                         <span className="handheld-toolbar-icon">
                             <i className="ci-menu"></i>
                         </span>
                         <span className="handheld-toolbar-label">Menu</span>
                     </a>
-                    <a className="d-table-cell handheld-toolbar-item" href="shop-cart.html">
-                        <span className="handheld-toolbar-icon"><i className="ci-cart"></i>
-                            <span className="badge bg-primary rounded-pill ms-1">4</span>
-                        </span><span className="handheld-toolbar-label">$265.00</span>
-                    </a>
+ 
                 </div>
             </div>
             {/*Back To Top Button*/}

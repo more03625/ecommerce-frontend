@@ -1,6 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import {connect} from 'react-redux'
+import { convertToINR, shippingValues } from '../../../helpers/comman_helpers'
+const Ordersummary = ({ cart }) => {
 
-const Ordersummary = () => {
+    const [totalPrice, setTotalPrice] = useState(0);
+    const [totalItems, setTotalItems] = useState(0);
+  
+    const updateValues = () => {
+      var items = 0;
+      var price = 0;
+  
+      cart.forEach(item => {
+        items += item.qty;
+        price += item.qty * item.discounted_price
+      });
+      console.log(price)
+      setTotalPrice(price);
+      setTotalItems(items);
+    }
+    useEffect(() => {
+        updateValues()
+    }, []);
+
+  
     return (
         <>
             <aside className="col-lg-4 pt-4 pt-lg-0 ps-xl-5">
@@ -8,56 +30,62 @@ const Ordersummary = () => {
                     <div className="py-2 px-xl-2">
                         <div className="widget mb-3">
                             <h2 className="widget-title text-center">Order summary</h2>
-                            <div className="d-flex align-items-center pb-2 border-bottom"><a className="d-block flex-shrink-0" href="#">
-                                <img src="img/shop/cart/widget/01.jpg" width="64" alt="Product" /></a>
-                                <div className="ps-2">
-                                    <h6 className="widget-product-title"><a href="#">Women Colorblock Sneakers</a></h6>
-                                    <div className="widget-product-meta"><span className="text-accent me-2">$150.<small>00</small></span><span className="text-muted">x 1</span></div>
-                                </div>
-                            </div>
-                            <div className="d-flex align-items-center py-2 border-bottom"><a className="d-block flex-shrink-0" href="#">
-                                <img src="img/shop/cart/widget/02.jpg" width="64" alt="Product" /></a>
-                                <div className="ps-2">
-                                    <h6 className="widget-product-title"><a href="#">TH Jeans City Backpack</a></h6>
-                                    <div className="widget-product-meta"><span className="text-accent me-2">$79.<small>50</small></span><span className="text-muted">x 1</span></div>
-                                </div>
-                            </div>
-                            <div className="d-flex align-items-center py-2 border-bottom"><a className="d-block flex-shrink-0" href="#">
-                                <img src="img/shop/cart/widget/03.jpg" width="64" alt="Product" /></a>
-                                <div className="ps-2">
-                                    <h6 className="widget-product-title"><a href="#">3-Color Sun Stash Hat</a></h6>
-                                    <div className="widget-product-meta"><span className="text-accent me-2">$22.<small>50</small></span><span className="text-muted">x 1</span></div>
-                                </div>
-                            </div>
-                            <div className="d-flex align-items-center py-2 border-bottom"><a className="d-block flex-shrink-0" href="#">
-                                <img src="img/shop/cart/widget/04.jpg" width="64" alt="Product" /></a>
-                                <div className="ps-2">
-                                <h6 className="widget-product-title"><a href="#">Cotton Polo Regular Fit</a></h6>
-                            <div className="widget-product-meta"><span className="text-accent me-2">$9.<small>00</small></span><span className="text-muted">x 1</span></div>
-                            </div>
-                            
-                    </div>
-                        <ul className="list-unstyled fs-sm pb-2 border-bottom">
-                        <li className="d-flex justify-content-between align-items-center"><span className="me-2">Subtotal:</span><span className="text-end">$265.<small>00</small></span></li>
-                        <li className="d-flex justify-content-between align-items-center"><span className="me-2">Shipping:</span><span className="text-end">—</span></li>
-                        <li className="d-flex justify-content-between align-items-center"><span className="me-2">Taxes:</span><span className="text-end">$9.<small>50</small></span></li>
-                    <li className="d-flex justify-content-between align-items-center"><span className="me-2">Discount:</span><span className="text-end">—</span></li>
-                    </ul>
-                    <h3 className="fw-normal text-center my-4">$274.<small>50</small></h3>
+                            {
+                                cart.length > 0 ? cart.map((product, index) => (
+                                    <div className="d-flex align-items-center pb-2 border-bottom"><a className="d-block flex-shrink-0" href="#">
+                                        <img src={product.image[0]} width="64" alt={product.title} style={{maxWidth:"35px", objectFit:"cover"}}/></a>
+                                        <div className="ps-2">
+                                            <h6 className="widget-product-title">
+                                                <a href="#">{product.title}</a>
+                                            </h6>
+                                            <div className="widget-product-meta">
+                                                <span className="text-accent me-2">{convertToINR(product.discounted_price)}</span>
+                                                <span className="text-muted">x {product.qty}</span></div>
+                                        </div>
+                                    </div>
+                                )): ("")
+                            }
 
-                        <form className="needs-validation" method="post" noValidate>
-                            <div className="mb-3">  
-                                <input className="form-control" type="text" placeholder="Promo code" required />
-                                <div class ="invalid-feedback">Please provide promo code.</div>
-                            </div>
-                        <button className="btn btn-outline-primary d-block w-100" type="submit">Apply promo code</button>
-                    </form>
+                            <ul className="list-unstyled fs-sm pb-2 border-bottom">
+                                <li className="d-flex justify-content-between align-items-center">
+                                    <span className="me-2">Subtotal:</span>
+                                    <span className="text-end">{convertToINR(totalPrice)}</span>
+                                </li>
+                                <li className="d-flex justify-content-between align-items-center">
+                                    <span className="me-2">Shipping:</span>
+                                    <span className="text-end">+ {convertToINR(shippingValues.shipping)}
+                                    </span>
+                                </li>
+                                <li className="d-flex justify-content-between align-items-center">
+                                    <span className="me-2">Taxes:</span>
+                                    <span className="text-end">
+                                        + {convertToINR((+shippingValues.taxPercentage / 100) * totalPrice)}
+                                    </span>
+                                </li>
+                                <li className="d-flex justify-content-between align-items-center">
+                                    <span className="me-2">Discount:</span>
+                                    <span className="text-end">- {convertToINR((+shippingValues.discountPercentage / 100) * totalPrice)}</span>
+                                </li>
+                            </ul>
+                            <h3 className="fw-normal text-center my-4">
+                                {
+                                    convertToINR((totalPrice + shippingValues.shipping + ((+shippingValues.taxPercentage / 100) * totalPrice)) - ((+shippingValues.discountPercentage / 100) * totalPrice))
+                                }
+                            </h3>
+
+
+                        </div>
+                    </div>
                 </div>
-            </div>
-            </div>
-    </aside>
+            </aside>
         </>
     )
 }
-        
-export default Ordersummary
+
+const mapStateToProps = (state) => {
+    return {
+        cart: state.shop.cart
+    }
+}
+
+export default connect(mapStateToProps)(Ordersummary)

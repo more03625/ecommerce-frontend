@@ -4,6 +4,7 @@ import { useDispatch, connect } from 'react-redux';
 import { setProducts } from "../../../redux/Shopping/shopping-actions";
 import { Host, Endpoints, notify, catchError } from '../../../helpers/comman_helpers';
 import axios from 'axios';
+import Spinner from '../../layouts/Spinner';
 
 const Content = (props) => {
 
@@ -39,12 +40,14 @@ const Content = (props) => {
 
                 {products.length > 0 ? (<h2 className="h3 text-center">Results for "{query}"</h2>) : ("")}
                 <div className="row pt-4 mx-n2">
-                    {products.length > 0 ? (
-                        products && products.map((product, index) => (
-                            <Product key={index} product={product} />
-                        ))
-                    ) : (
-                    <h2 className="h3 text-center">There are no results for "{query}"</h2>
+                    {loading ? (<Spinner />) : (
+                        products.length > 0 ? (
+                            products && products.map((product, index) => (
+                                <Product key={index} product={product} />
+                            ))
+                        ) : (
+                            <h2 className="h3 text-center">There are no results for "{query}"</h2>
+                        )
                     )}
                 </div>
             </section>

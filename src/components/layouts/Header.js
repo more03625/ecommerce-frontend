@@ -4,7 +4,7 @@ import logo from '../../assets/images/logo/logo-dark.png';
 import AuthModel from './AuthModel';
 import logoIcon from '../../assets/images/logo/logo-icon.png';
 import { connect } from 'react-redux';
-import { convertToINR, convertToSlug, errors } from '../../helpers/comman_helpers';
+import { convertToINR, convertToSlug, errors, getUserInfo } from '../../helpers/comman_helpers';
 import { loadCurrentItem, removeFromCart } from '../../redux/Shopping/shopping-actions';
 const Header = ({ cart, removeFromCart }) => {
     const params = new URLSearchParams(window.location.search);
@@ -27,7 +27,6 @@ const Header = ({ cart, removeFromCart }) => {
     useEffect(() => {
         updateValues();
     }, [cart, totalItems, totalItems, setTotalPrice, setTotalItems]);
-
     const cartProducts = cart.length > 0 ? (
         cart && cart.map((product, index) => {
             const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id, qty } = product;
@@ -88,17 +87,26 @@ const Header = ({ cart, removeFromCart }) => {
                                     <img src={logoIcon} width="74" alt="Cartzilla" /></Link>
                                 <form method="get" action="/results">
                                     <div className="input-group d-none d-lg-flex mx-4">
-                                        <input className="form-control rounded-end pe-5" type="text" placeholder="Apple iphone..." name="search_query" defaultValue={query}/>
+                                        <input className="form-control rounded-end pe-5" type="text" placeholder="Apple iphone..." name="search_query" defaultValue={query} />
                                         <i className="ci-search position-absolute top-50 end-0 translate-middle-y text-muted fs-base me-3"></i>
                                     </div>
                                 </form>
                                 <div className="navbar-toolbar d-flex flex-shrink-0 align-items-center">
                                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span className="navbar-toggler-icon"></span></button><a className="navbar-tool navbar-stuck-toggler" href="#"><span className="navbar-tool-tooltip">Expand menu</span>
                                         <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-menu"></i></div></a>
+                                    {
+                                        getUserInfo() === null ? (
+                                            <a className="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
+                                                <div className="navbar-tool-icon-box">
+                                                    <i className="navbar-tool-icon ci-user"></i>
+                                                </div>
+                                                <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div>
+                                            </a>
+                                        ) : ("")
 
-                                    <a className="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
-                                        <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-user"></i></div>
-                                        <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div></a>
+                                    }
+
+
                                     <div className="navbar-tool dropdown ms-3">
                                         <Link className="navbar-tool-icon-box bg-secondary dropdown-toggle" to="/cart">
                                             <span className="navbar-tool-label">{totalItems}</span><i className="navbar-tool-icon ci-cart"></i>
@@ -137,7 +145,7 @@ const Header = ({ cart, removeFromCart }) => {
                                     <form method="get" action="/results">
                                         <div className="input-group d-lg-none my-3">
                                             <i className="ci-search position-absolute top-50 start-0 translate-middle-y text-muted fs-base ms-3"></i>
-                                            <input className="form-control rounded-start" type="text" placeholder="Apple iphone..." name="search_query" defaultValue={query}/>
+                                            <input className="form-control rounded-start" type="text" placeholder="Apple iphone..." name="search_query" defaultValue={query} />
                                         </div>
                                     </form>
                                 </div>

@@ -1,11 +1,10 @@
 import * as actionTypes from './shopping-types';
 
-// These function will be dispatched to our Reducer with out `string identifier`
-export const setProducts = (items) => { // These function will go to Reducer with data in return statement!
+export const setProducts = (items) => { // These functions will go to Reducer with data in return statement!
     return {
-        type:actionTypes.SET_PRODUCTS,
-        payload:{
-            allProducts:items
+        type: actionTypes.SET_PRODUCTS,
+        payload: {
+            allProducts: items
         }
     }
 }
@@ -34,14 +33,14 @@ export const adjustQty = (itemID, value) => {
         type: actionTypes.ADJUST_QTY,
         payload: {
             id: itemID,
-            qty:value
+            qty: value
         }
     }
 }
 
 export const loadCurrentItem = (item) => {
-    return{
-        type:actionTypes.LOAD_CURRENT_ITEM,
-        payload:item
+    return {
+        type: actionTypes.LOAD_CURRENT_ITEM,
+        payload: item
     }
 }
