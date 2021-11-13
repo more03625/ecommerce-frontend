@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const NextPreviousButtons = ({previous, next}) => {
+const NextPreviousButtons = ({previous, next, handleSubmit}) => {
     return (
         <>
             <div className="w-50 pe-3">
@@ -12,11 +12,11 @@ const NextPreviousButtons = ({previous, next}) => {
                 </Link>
             </div>
             <div className="w-50 ps-2">
-                <Link className="btn btn-primary d-block w-100" to={next}>
+                <button className="btn btn-primary d-block w-100" onClick={handleSubmit}>
                     <span className="d-none d-sm-inline">Proceed to Shipping</span>
                     <span className="d-inline d-sm-none">Next</span>
                     <i className="ci-arrow-right mt-sm-0 ms-1"></i>
-                </Link>
+                </button>
             </div>
         </>
     )

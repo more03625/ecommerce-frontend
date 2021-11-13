@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { removeFromCart, adjustQty, loadCurrentItem } from '../../../redux/Shopping/shopping-actions';
 import { Link } from 'react-router-dom';
 const CartProducts = (props) => {
-  console.log("props.product ===> ", props.product)
   const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id, qty } = props.product;
   var productURL = `/product/${convertToSlug(title)}/${_id}`
 

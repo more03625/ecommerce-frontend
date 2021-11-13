@@ -6,7 +6,8 @@ export const Host = window.location.host === "localhost:3000" ? "http://localhos
 export const Endpoints = {
     product: "api/products",
     signIn: "api/auth/login",
-    signUp:"api/auth/register"
+    signUp:"api/auth/register",
+    users:"api/users"
 }
 export const shippingValues = {
     shipping:60,

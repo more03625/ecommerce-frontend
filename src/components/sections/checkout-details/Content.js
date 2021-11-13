@@ -4,6 +4,7 @@ import OrderSummary from './OrderSummary';
 import PageTitle from '../product-details/PageTitle';
 
 const Content = () => {
+    
     return (
         <>
             <PageTitle title="Checkout" />

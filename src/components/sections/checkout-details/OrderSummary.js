@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import {connect} from 'react-redux'
+import { useHistory } from 'react-router';
 import { convertToINR, shippingValues } from '../../../helpers/comman_helpers'
 const Ordersummary = ({ cart }) => {
+    const history = useHistory();
 
     const [totalPrice, setTotalPrice] = useState(0);
     const [totalItems, setTotalItems] = useState(0);
-  
+    
     const updateValues = () => {
       var items = 0;
       var price = 0;
@@ -14,11 +16,12 @@ const Ordersummary = ({ cart }) => {
         items += item.qty;
         price += item.qty * item.discounted_price
       });
-      console.log(price)
+      
       setTotalPrice(price);
       setTotalItems(items);
     }
     useEffect(() => {
+        cart.length === 0 && history.push("/");
         updateValues()
     }, []);
 

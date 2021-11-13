@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { convertToINR } from '../../../helpers/comman_helpers';
 
 const Subtotal = ({ cart }) => {
@@ -15,7 +16,6 @@ const Subtotal = ({ cart }) => {
       items += item.qty;
       price += item.qty * item.discounted_price
     });
-    console.log(price)
     setTotalPrice(price);
     setTotalItems(items);
   }
@@ -33,9 +33,9 @@ const Subtotal = ({ cart }) => {
               <h2 className="h6 mb-3 pb-1">Subtotal ( {totalItems} Items )</h2>
               <h3 className="fw-normal">{convertToINR(totalPrice)}</h3>
             </div>
-            <a className="btn btn-primary btn-shadow d-block w-100 mt-4" href="#">
+            <Link className="btn btn-primary btn-shadow d-block w-100 mt-4" to="/checkout-details">
               <i className="ci-card fs-lg me-2"></i>Proceed to Checkout
-            </a>
+            </Link>
           </div>
         </div>
       </aside>
