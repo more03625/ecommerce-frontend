@@ -13,7 +13,7 @@ const NextPreviousButtons = ({previous, next, handleSubmit}) => {
             </div>
             <div className="w-50 ps-2">
                 <button className="btn btn-primary d-block w-100" onClick={handleSubmit}>
-                    <span className="d-none d-sm-inline">Proceed to Shipping</span>
+                    <span className="d-none d-sm-inline">Proceed to payment</span>
                     <span className="d-inline d-sm-none">Next</span>
                     <i className="ci-arrow-right mt-sm-0 ms-1"></i>
                 </button>

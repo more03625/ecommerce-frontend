@@ -24,7 +24,7 @@ const Content = () => {
                                     <span className="d-inline d-sm-none">Back</span></a></div>
                             <div className="w-50 ps-2">
                                 <a className="btn btn-primary d-block w-100" href="#">
-                                    <span className="d-none d-sm-inline">Proceed to Shipping</span>
+                                    <span className="d-none d-sm-inline">Proceed to Shipping Rahul</span>
                                     <span className="d-inline d-sm-none">Next</span>
                                     <i className="ci-arrow-right mt-sm-0 ms-1"></i>
                                 </a>

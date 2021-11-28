@@ -28,7 +28,6 @@ const shopReducer = (state = initialState, action) => { // here data comming fro
                 cart: state.cart.filter(item => item._id !== action.payload.id)
             }
         case actionTypes.ADJUST_QTY:
-            console.log("action.payload.qty ===> ", action.payload, " type ===>", typeof +action.payload.qty)
             return {
                 ...state,
                 cart: state.cart.map(item => item._id === action.payload.id ? { ...item, qty: +action.payload.qty } : item)

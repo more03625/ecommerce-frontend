@@ -10,7 +10,11 @@ const App = () => {
     const Thankyoufororder = lazy(() => import('./components/pages/Thankyoufororder'));
     const PageNotFound = lazy(() => import('./components/pages/PageNotFound'));
     const Results = lazy(() => import('./components/pages/Results'));
+                    
+    {/* Account */}
 
+    const Profile = lazy(() => import('./components/pages/Profile'));
+    
     // Admin
     const Dashboard = lazy(() => import('./components/admin/pages/Dashboard'))
     const Addproduct = lazy(() => import('./components/admin/pages/Addproducts'));
@@ -28,6 +32,12 @@ const App = () => {
                     <Route exact path="/review-cart" component={Cart} />
                     <Route exact path="/payment" component={Thankyoufororder} />
                     <Route exact path="/thank-you-for-order" component={Thankyoufororder} />
+
+                    {/* Account */}
+                    <Route exact path="/account/profile" component={Profile} />
+                    <Route exact path="/account/orders" component={Thankyoufororder} />
+                    <Route exact path="/account/wishlist" component={Thankyoufororder} />
+
                     {/* Admin */}
                     <Route exact path="/admin/dashboard" component={Dashboard} />
                     <Route exact path="/admin/products" component={Products} />

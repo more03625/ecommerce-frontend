@@ -14,7 +14,7 @@ const Product = ({ product, addToCart, loadCurrentItem }) => {
     return (
         <>
 
-            <div key={_id} className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" onClick={() => loadCurrentItem(product)}>
+            <div key={_id} className="col-md-4 col-sm-6 px-2 mb-4" onClick={() => loadCurrentItem(product)}>
                 <div className="card product-card">
                     <Link className="card-img-top d-flex overflow-hidden justify-content-center" to={productURL}>
                         <img className="justify-content-center" src={image && image[0]} alt={title} style={{ maxHeight: "300px", maxWidth: "300px", objectFit: "contain" }} />

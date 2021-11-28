@@ -14,82 +14,82 @@ const AddproductForm = () => {
     }
 
     const isValid = () => {
-        if (productInfo && productInfo.title === '' || productInfo.title === undefined) {
+        if (productInfo && !productInfo.title) {
             var err = 'Please add a product name';
             setError({ title: err });
             notify(err, 'error');
             return false;
-        } else if (productInfo.status === '' || productInfo.status === undefined) {
+        } else if (!productInfo.status) {
             var err = 'Please select status';
             setError({ status: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.description === '' || productInfo.description === undefined) {
+        } else if (!productInfo.description) {
             var err = "Please add description";
             setError({ description: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.original_price === '' || productInfo.original_price === undefined) {
+        } else if (!productInfo.original_price) {
             var err = "Please add original price";
             setError({ original_price: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.discounted_price === '' || productInfo.discounted_price === undefined) {
+        } else if (!productInfo.discounted_price) {
             var err = "Please add discounted price";
             setError({ discounted_price: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.internal_storage === '' || productInfo.internal_storage === undefined) {
+        } else if (!productInfo.internal_storage) {
             var err = "Please add internal storage";
             setError({ internal_storage: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.ram === '' || productInfo.ram === undefined) {
+        } else if (!productInfo.ram) {
             var err = "Please add ram";
             setError({ ram: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.expandable_storage === '' || productInfo.expandable_storage === undefined) {
+        } else if (!productInfo.expandable_storage) {
             var err = "Please add expandable storage";
             setError({ expandable_storage: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.memory_card_type === '' || productInfo.memory_card_type === undefined) {
+        } else if (!productInfo.memory_card_type) {
             var err = "Please add memory card_type";
             setError({ memory_card_type: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.slot_type === '' || productInfo.slot_type === undefined) {
+        } else if (!productInfo.slot_type) {
             var err = "Please add slot type";
             setError({ slot_type: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.primary_camera === '' || productInfo.primary_camera === undefined) {
+        } else if (!productInfo.primary_camera) {
             var err = "Please add primary camera";
             setError({ primary_camera: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.secondary_camera === '' || productInfo.secondary_camera === undefined) {
+        } else if (!productInfo.secondary_camera) {
             var err = "Please add secondary camera";
             setError({ secondary_camera: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.flash === '' || productInfo.flash === undefined) {
+        } else if (!productInfo.flash) {
             var err = "Please add flash";
             setError({ flash: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.modal_number === '' || productInfo.modal_number === undefined) {
+        } else if (!productInfo.modal_number) {
             var err = "Please add modal number";
             setError({ modal_number: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.modal_name === '' || productInfo.modal_name === undefined) {
+        } else if (!productInfo.modal_name) {
             var err = "Please add modal name";
             setError({ modal_name: err });
             notify(err, 'error');
             return false
-        } else if (productInfo.color === '' || productInfo.color === undefined) {
+        } else if (!productInfo.color) {
             var err = "Please add color";
             setError({ color: err });
             notify(err, 'error');
@@ -105,18 +105,18 @@ const AddproductForm = () => {
         if (isValid()) {
             setError({})
 
-            var url = Host +  Endpoints.product
+            var url = Host + Endpoints.product
             var headers = {
-                headers:{
+                headers: {
                     token: `Bearer ${getUserInfo().token}`
                 }
             }
             const response = await axios.post(url, productInfo, headers);
-            if(response.data.error){
+            if (response.data.error) {
                 notify(response.data.title, 'error');
-            }else{
+            } else {
                 notify(response.data.title, 'success');
-                setTimeout(function(){
+                setTimeout(function () {
                     history.push("/admin/dashboard");
                 }, 2000);
             }
@@ -130,11 +130,11 @@ const AddproductForm = () => {
         var files = e.target.files;
         var base64Images = [];
         for (var i = 0; i < files.length; i++) {
-          const singleBase64Image = await convertToBase64(files[i]);
-          base64Images.push(singleBase64Image);
+            const singleBase64Image = await convertToBase64(files[i]);
+            base64Images.push(singleBase64Image);
         }
         setProductInfo({ ...productInfo, image: base64Images });
-      }
+    }
     return (
         <>
             <section className="col-lg-8 pt-lg-4 pb-4 mb-3">

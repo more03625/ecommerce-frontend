@@ -1,17 +1,30 @@
 import React, { useState } from 'react'
-import { notify, EMAIL_REGEX, Host, Endpoints, catchError, userTokenName } from '../../helpers/comman_helpers';
+import { notify, EMAIL_REGEX, Host, Endpoints, catchError, userTokenName, googleClientID, refreshTokenSetup, defaultCreds } from '../../helpers/comman_helpers';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import Spinner from './Spinner';
-
+import GoogleLogin from 'react-google-login';
+import loginWithGoogleButton from '../../assets/images/logo/login-with-google.png'
+import loginWithFacebookButton from '../../assets/images/logo/login-with-facebook.png'
 const AuthModel = () => {
 
-    const [signInData, setSignInData] = useState({});
+    const [signInData, setSignInData] = useState({ email: defaultCreds.email, password: defaultCreds.password });
     const [error, setError] = useState({});
     const [loading, setLoading] = useState({ signIn: false, signUp: false });
     const [signUpData, setSignUpData] = useState(null);
     const [signUpDataError, setSignUpDataError] = useState({});
     const history = useHistory();
+
+    // const responseGoogle = (response) => {
+    //     let data = {
+    //         username: response.profileObj.name,
+    //         email: response.profileObj.email,
+    //         profileImage: response.profileObj.imageUrl,
+    //         authProvider: 'Google'
+    //     }
+    //     setSignInData(data);
+    //     handleSignInSubmit()
+    // }
 
     const handleChange = (e, type) => {
         if (type === 'signin') {
@@ -21,36 +34,38 @@ const AuthModel = () => {
         }
     }
     const isValid = () => {
-        if (signInData.email == undefined || signInData.email === '' || !signInData.email.match(EMAIL_REGEX)) {
+        if (!signInData.email || !EMAIL_REGEX(signInData.email)) {
             setError({ email: "Please enter valid email!" });
             return false;
-        } else if (signInData.password == undefined || signInData.password === '') {
+        } else if (!signInData.password) {
             setError({ password: "Please enter password!" });
             return false;
         } else {
             return true;
         }
     }
-    const handleSignInSubmit = async (e) => {
-        setLoading(true);
-        e.preventDefault();
+    const handleSignInSubmit = async (e = null) => {
+        setLoading({ signIn: true });
+        e && e.preventDefault();
         setError({});
         try {
             if (isValid()) {
-                var url = Host + Endpoints.signIn;
+                let url = Host + Endpoints.signIn;
                 const result = await axios.post(url, signInData);
                 if (result.data.error === true) {
                     notify(result.data.title, 'error');
                 } else {
                     localStorage.setItem(userTokenName, JSON.stringify(result.data));
                     notify(result.data.title, 'success');
+                    document.getElementsByClassName('btn-close')[0].click()
                 }
             }
         } catch (error) {
             notify(catchError, 'error');
         }
-        setLoading(false);
+        setLoading({ signIn: false });
     }
+
     const handleSignupChange = (e) => {
         setSignUpData({ ...signUpData, [e.target.name]: e.target.value });
     }
@@ -91,7 +106,9 @@ const AuthModel = () => {
                 if (result.data.error === true) {
                     notify(result.data.title, 'error')
                 } else {
-                    document.getElementsByClassName('btn-close')[0].click();
+                    setTimeout(function () {
+                        document.getElementsByClassName('btn-close')[0].click()
+                    }, 2000)
                     notify(result.data.title, 'success')
                 }
             } catch (e) {
@@ -101,6 +118,22 @@ const AuthModel = () => {
         }
         setLoading({ signUp: false });
     }
+    // const onGoogleSuccess = (res) => {
+    //     console.log('[Login Success] Current User : ', res.profileObj);
+    //     let data = {
+    //         username: res.profileObj.name,
+    //         email: res.profileObj.email,
+    //         profileImage: res.profileObj.imageUrl,
+    //         authProvider: 'Google'
+    //     }
+    //     setSignInData(data);
+    //     sendDataToDataBase();
+    //     refreshTokenSetup(res)
+    // }
+    // const onGoogleFailure = (res) => {
+    //     console.log('[Login Failed] res : ', res);
+
+    // }
     return (
         <>
             <div className="modal fade" id="signin-modal" tabIndex="-1" role="dialog">
@@ -117,13 +150,13 @@ const AuthModel = () => {
                             <form className="tab-pane fade show active" autoComplete="off" noValidate id="signin-tab" onSubmit={handleSignInSubmit}>
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="si-email">Email address</label>
-                                    <input className="form-control" type="email" id="si-email" name="email" placeholder="rahulmore@gmail.com" onChange={(e) => handleChange(e, 'signin')} />
+                                    <input className="form-control" type="email" id="si-email" name="email" placeholder="rahulmore@gmail.com" onChange={(e) => handleChange(e, 'signin')} defaultValue={signInData.email} />
                                     <div className="text-danger">{error.email}</div>
                                 </div>
                                 <div className="mb-3">
                                     <label className="form-label" htmlFor="si-password">Password</label>
                                     <div className="password-toggle">
-                                        <input className="form-control" type="password" name="password" id="si-password" onChange={(e) => handleChange(e, 'signin')} />
+                                        <input className="form-control" type="password" name="password" id="si-password" onChange={(e) => handleChange(e, 'signin')} defaultValue={signInData.password} />
                                         <label className="password-toggle-btn" aria-label="Show/hide password">
                                             <input className="password-toggle-check" type="checkbox" /><span className="password-toggle-indicator"></span>
                                         </label>
@@ -137,10 +170,21 @@ const AuthModel = () => {
                                     </div>
                                     {/* <a className="fs-sm" href="#">Forgot password?</a> */}
                                 </div>
-                                <button className="btn btn-primary btn-shadow d-block w-100" type="submit" disabled={loading.signIn}>Sign in
-                                    {
-                                        loading.signIn === true ? (<Spinner size="spinner-border-sm" />) : ('')
-                                    }
+                                {/* <GoogleLogin
+                                    clientId={googleClientID}
+                                    render={renderProps => (
+                                        <div class="d-grid gap-2 d-md-block">
+                                            <img className="w-50" src={loginWithGoogleButton} onClick={renderProps.onClick} disabled={renderProps.disabled} style={{ height: '50px', cursor: 'pointer' }} />
+                                        </div>
+                                    )}
+                                    buttonText="Login"
+                                    onSuccess={onGoogleSuccess}
+                                    onFailure={onGoogleFailure}
+                                    cookiePolicy={'single_host_origin'}
+                                    isSignedIn={true}
+                                /> */}
+                                <button className="btn btn-primary btn-shadow d-block w-100" type="submit" disabled={loading.signIn}>
+                                    {loading.signIn === true ? (<Spinner size="spinner-border-sm" />) : ('Sign in')}
                                 </button>
                             </form>
                             <form className="tab-pane fade" autoComplete="off" id="signup-tab" onSubmit={handleSignUp}>
@@ -177,14 +221,8 @@ const AuthModel = () => {
                                         </label>
                                     </div>
                                 </div>
-                                <button className="btn btn-primary btn-shadow d-block w-100" type="submit" disabled={loading.signUp}>Sign up
-                                    {
-                                        loading.signUp === true ? (
-                                            <div class="mx-2 mt-1 spinner-border spinner-border-sm" role="status">
-                                                <span class="visually-hidden">Loading...</span>
-                                            </div>
-                                        ) : ('')
-                                    }
+                                <button className="btn btn-primary btn-shadow d-block w-100" type="submit" disabled={loading.signUp}>
+                                    {loading.signUp === true ? (<Spinner size="spinner-border-sm" />) : ('Sign Up')}
                                 </button>
                             </form>
                         </div>

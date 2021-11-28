@@ -14,5 +14,29 @@
     "selectMemoryCardType":[
         { "id":1 , "name":"micro sd"},
         { "id":2 , "name":"sd card"}
+    ],
+    "selectBrands":[
+        {"id" : 1, "name" : "Apple"},
+        {"id" : 2, "name" : "Motorola"},
+        {"id" : 3, "name" : "OnePlus"},
+        {"id" : 4, "name" : "Google"},
+        {"id" : 5, "name" : "Asus"},
+        {"id" : 6, "name" : "Samsung"},
+        {"id" : 7, "name" : "Huawei"},
+        {"id" : 8, "name" : "Nokia"},
+        {"id" : 9, "name" : "Sony"},
+        {"id" : 10, "name" : "LG"},
+        {"id" : 11, "name" : "HTC"},
+        {"id" : 12, "name" : "Realme"}
+    ],
+    "selectColours":[
+        {"id" : 1, "name" : "Oxygen Blue", "colourCode" : "#92b6d5"},
+        {"id" : 2, "name" : "Whiter", "colourCode" : "#FFFFFF"},
+        {"id" : 7, "name" : "Black", "colourCode" : "#383b3e"},
+        {"id" : 3, "name" : "Gold", "colourCode" : "#DAA520"},
+        {"id" : 4, "name" : "Dynamic Gray", "colourCode" : "#8c92ac"},
+        {"id" : 5, "name" : "Purple", "colourCode" : "#A020F0"},
+        {"id" : 6, "name" : "Charcoal Ink", "colourCode" : "#36454f"},
+        {"id" : 8, "name" : "Just Black", "colourCode" : "#000000"}
     ]
 }

@@ -92,19 +92,15 @@ const Header = ({ cart, removeFromCart }) => {
                                     </div>
                                 </form>
                                 <div className="navbar-toolbar d-flex flex-shrink-0 align-items-center">
-                                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span className="navbar-toggler-icon"></span></button><a className="navbar-tool navbar-stuck-toggler" href="#"><span className="navbar-tool-tooltip">Expand menu</span>
-                                        <div className="navbar-tool-icon-box"><i className="navbar-tool-icon ci-menu"></i></div></a>
-                                    {
-                                        getUserInfo() === null ? (
+                                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"><span className="navbar-toggler-icon"></span></button>
+                                    {!getUserInfo() ? (
                                             <a className="navbar-tool ms-1 ms-lg-0 me-n1 me-lg-2" href="#signin-modal" data-bs-toggle="modal">
                                                 <div className="navbar-tool-icon-box">
                                                     <i className="navbar-tool-icon ci-user"></i>
                                                 </div>
                                                 <div className="navbar-tool-text ms-n3"><small>Hello, Sign in</small>My Account</div>
                                             </a>
-                                        ) : ("")
-
-                                    }
+                                        ) : ("")}
 
 
                                     <div className="navbar-tool dropdown ms-3">

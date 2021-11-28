@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { selectStatus, selectFlash, selectMemoryCardType } from '../../../data/select.json';
 import { convertToINR, notify, uppercaseFirstLetter } from '../../../helpers/comman_helpers';
 import { connect } from 'react-redux';
@@ -8,10 +8,10 @@ const ProductDetails = (props) => {
 
     const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = props.currentItem;
 
-    const [userSelectQty, setUserSelectQty] = useState({qty: 1});
+    const [userSelectQty, setUserSelectQty] = useState({ qty: 1 });
 
     const handleChange = (e) => {
-        setUserSelectQty({ ...userSelectQty, [e.target.name] : e.target.value });
+        setUserSelectQty({ ...userSelectQty, [e.target.name]: e.target.value });
     }
 
     const handleSubmit = (e) => {
@@ -193,7 +193,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart : (id) => dispatch(addToCart(id)),
+        addToCart: (id) => dispatch(addToCart(id)),
         adJustQty: (id, value) => dispatch(adjustQty(id, value))
     }
 }
