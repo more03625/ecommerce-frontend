@@ -94,3 +94,6 @@ export const defaultCreds = {
     email : 'rahulmore@gmail.com',
     password : '123'
 }
+export const defaultData = {
+    defaultAddToCartQty:1
+}

@@ -17,7 +17,7 @@ const ProductDetails = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         props.adJustQty(_id, userSelectQty.qty)
-        props.addToCart(_id)
+        props.addToCart(_id, userSelectQty.qty)
         notify('Product has been added to cart!', 'success');
     }
     return (
@@ -193,7 +193,7 @@ const mapStateToProps = state => {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: (id) => dispatch(addToCart(id)),
+        addToCart: (id, value) => dispatch(addToCart(id, value)),
         adJustQty: (id, value) => dispatch(adjustQty(id, value))
     }
 }

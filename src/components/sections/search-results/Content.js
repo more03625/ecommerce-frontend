@@ -38,7 +38,7 @@ const Content = (props) => {
     return (
         <>
 
-            <PageTitle title={products.length > 0 ? (`Results for "${query}"`) : (`There are no results for "${query}"`)}/>
+            <PageTitle title={products.length > 0 ? (`Results for "${query}"`) : (`There are no results for "${query}"`)} />
             <div className="container pb-5 mb-2 mb-md-4">
                 <div className="row">
                     <Filters />

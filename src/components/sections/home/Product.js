@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import QuickModel from './QuickModel';
-import { catchError, convertToSlug, Endpoints, Host, notify, convertToINR } from '../../../helpers/comman_helpers';
+import { catchError, convertToSlug, Endpoints, Host, notify, convertToINR, defaultData } from '../../../helpers/comman_helpers';
 import axios from 'axios';
 import Spinner from '../../layouts/Spinner';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setProducts, addToCart, loadCurrentItem } from "../../../redux/Shopping/shopping-actions";
 
-const Product = ({products, addToCart, loadCurrentItem}) => {
+const Product = ({ products, addToCart, loadCurrentItem }) => {
     const [loading, setLoading] = useState(false);
     const dispatch = useDispatch();
 
     const handleCart = (id) => {
-        addToCart(id)
+        addToCart(id, defaultData.defaultAddToCartQty)
         notify('Product has been added to cart!', 'success');
     }
     const getProducts = async () => {
@@ -38,6 +38,7 @@ const Product = ({products, addToCart, loadCurrentItem}) => {
     const renderProducts = products && products.map((product, index) => {
 
         const { categories, color, createdAt, description, discounted_price, expandable_storage, flash, image, internal_storage, memory_card_type, modal_name, modal_number, original_price, primary_camera, ram, secondary_camera, slot_type, status, title, updatedAt, _id } = product;
+        
         var productURL = `/product/${convertToSlug(title)}/${_id}`
         return (
             <div key={index} className="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" onClick={() => loadCurrentItem(product)}>
@@ -61,7 +62,7 @@ const Product = ({products, addToCart, loadCurrentItem}) => {
                         <button className="btn btn-primary btn-sm d-block w-100 mb-2" type="button" onClick={() => handleCart(_id)}>
                             <i className="ci-cart fs-sm me-1"></i>Add to Cart
                         </button>
-                      
+
                     </div>
                 </div>
                 <hr className="d-sm-none" />
@@ -72,7 +73,7 @@ const Product = ({products, addToCart, loadCurrentItem}) => {
     return (
         <>
             <section className="container pt-md-3 pb-5 mb-md-3">
-           
+
                 <h2 className="h3 text-center">Trending products</h2>
                 <div className="row pt-4 mx-n2">
                     {loading ? <Spinner /> : renderProducts}
@@ -84,13 +85,13 @@ const Product = ({products, addToCart, loadCurrentItem}) => {
 }
 const mapStateToProps = (state) => {
     return {
-        products:state.shop.products
+        products: state.shop.products
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        addToCart: (id) => dispatch(addToCart(id)),
-        loadCurrentItem : (item) => dispatch(loadCurrentItem(item))
+        addToCart: (id, value) => dispatch(addToCart(id, value)),
+        loadCurrentItem: (item) => dispatch(loadCurrentItem(item))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Product)

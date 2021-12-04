@@ -8,17 +8,18 @@ export const setProducts = (items) => { // These functions will go to Reducer wi
         }
     }
 }
-export const addToCart = (itemID) => {
+export const addToCart = (itemID, qty) => {
     return {
         type: actionTypes.ADD_TO_CART,
         payload: {
-            id: itemID
+            id: itemID,
+            qty:qty
         }
     }
 }
 
 export const removeFromCart = (itemID) => {
-    console.log("itemID bro===> ", itemID)
+    console.log("itemID here===> ", itemID)
     return {
         type: actionTypes.REMOVE_FROM_CART,
         payload: {

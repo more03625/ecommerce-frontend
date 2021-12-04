@@ -15,7 +15,7 @@ const ShippingInfo = () => {
     const handleChange = (e) => {
         setShippingInfo({ ...shippingInfo, [e.target.name]: e.target.value });
     }
-  
+
     const isValid = () => {
         if (shippingInfo.username === '' || shippingInfo.username === undefined || shippingInfo.username === null) {
             var err = 'Please enter name';
@@ -80,15 +80,21 @@ const ShippingInfo = () => {
     }
     const getUserDetails = async () => {
         setLoading({ apiLoading: true })
-        let url = Host + Endpoints.users + "/find/" + getUserInfo().data._id;
-        let headers = {
-            token: `Bearer ${getUserInfo().token}`
-        }
-        const response = await axios.get(url, { headers });
-        if (response.data.error) {
-            notify(response.data.title, 'error');
-        } else {
-            setShippingInfo(response.data.data);
+        try {
+            let url = Host + Endpoints.users + "/find/" + getUserInfo().data._id;
+            let headers = {
+                token: `Bearer ${getUserInfo().token}`
+            }
+            const response = await axios.get(url, { headers });
+            console.log(response.data.error);
+            if (response.data.error) {
+                notify(response.data.title, 'error');
+            } else {
+                setShippingInfo(response.data.data);
+            }
+        } catch (err) {
+            const { response } = err
+            notify(response.data.title, 'error')
         }
         setLoading({ apiLoading: false })
     }
